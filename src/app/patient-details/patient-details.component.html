@@ -1,0 +1,39 @@
+<div class="page-wrapper">
+    <nav class="navbar">
+      <div class="logo-container">
+        <img src="assets/icons/logo.png" alt="PetalCare Logo" class="logo-icon" />
+        <span class="logo-text">PetalCare</span>
+      </div>
+    </nav>
+  
+    <div class="login-card">
+      <button class="back-btn" (click)="goBack()">← Back</button>
+      <div class="progress-bar"><div class="progress-step step-2"></div></div>
+      <h2>Patient Details</h2>
+  
+      <form [formGroup]="patientForm" (ngSubmit)="createAccount()">
+        <div class="row">
+          <input type="text" placeholder="First Name*" formControlName="firstName" />
+          <input type="text" placeholder="Last Name*" formControlName="lastName" />
+        </div>
+  
+        <div class="select-wrapper">
+          <select formControlName="gender">
+            <option value="" disabled selected>Select your gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        
+        <input type="date" formControlName="dob" placeholder="Date of Birth*" />
+        <textarea placeholder="Enter Patient Medical History" formControlName="medicalHistory"></textarea>
+        <textarea placeholder="Enter Family Medical History" formControlName="familyHistory"></textarea>
+  
+        <a class="add-link">+ Add details of other Patient</a>
+  
+        <button class="login-btn">Create Account</button>
+      </form>
+    </div>
+  </div>
+  

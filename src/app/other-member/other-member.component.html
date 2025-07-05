@@ -1,0 +1,71 @@
+<div class="page-wrapper">
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="assets/icons/logo.png" alt="PetalCare Logo" class="logo-icon" />
+      <span class="logo-text">PetalCare</span>
+    </div>
+  </nav>
+
+  <div class="login-card">
+    <button class="back-btn" (click)="goBack()">← Back</button>
+    <div class="progress-bar"><div class="progress-step step-2"></div></div>
+    <h2>Other Member</h2>
+
+    <form [formGroup]="otherMemberForm" (ngSubmit)="createAccount()">
+      <div class="row">
+        <input
+          type="text"
+          formControlName="firstName"
+          placeholder="First Name*"
+          [class.invalid]="submitted && otherMemberForm.get('firstName')?.invalid"
+        />
+        <input
+          type="text"
+          formControlName="lastName"
+          placeholder="Last Name*"
+          [class.invalid]="submitted && otherMemberForm.get('lastName')?.invalid"
+        />
+      </div>
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="Enter your email"
+        [class.invalid]="submitted && otherMemberForm.get('email')?.invalid"
+      />
+      <input
+        type="text"
+        formControlName="phone"
+        placeholder="Enter your phone number"
+        [class.invalid]="submitted && otherMemberForm.get('phone')?.invalid"
+      />
+      <input
+        type="date"
+        formControlName="dob"
+        placeholder="Pick your date of birth"
+        [class.invalid]="submitted && otherMemberForm.get('dob')?.invalid"
+      />
+      <input
+        type="text"
+        formControlName="occupation"
+        placeholder="Enter your occupation"
+        [class.invalid]="submitted && otherMemberForm.get('occupation')?.invalid"
+      />
+      <div class="select-wrapper">
+        <select
+          formControlName="relationship"
+          [class.invalid]="submitted && otherMemberForm.get('relationship')?.invalid"
+        >
+          <option value="" disabled selected>How are you related to the patient?</option>
+          <option value="Parent">Father</option>
+          <option value="Guardian">Mother</option>
+          <option value="Relative">GrandFather</option>
+          <option value="Relative">GrandMother</option>
+          <option value="Relative">Uncle</option>
+          <option value="Relative">Aunt</option>
+          <option value="Relative">Other</option>
+        </select>
+      </div>
+      <button class="login-btn" type="submit">Next</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<div class="page-wrapper">
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="assets/icons/logo.png" alt="PetalCare Logo" class="logo-icon" />
+      <span class="logo-text">PetalCare</span>
+    </div>
+  </nav>
+  
+    
+    <!-- Sign Up Card -->
+    <div class="login-card">
+      <!-- Back Arrow Button -->
+      <button class="back-btn" (click)="goToLogin()">← Back to Login</button>
+  
+      <h2>Create Account</h2>
+  
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="field-group">
+         
+          <input type="text" formControlName="firstName" placeholder="Enter first name"[class.invalid]="formSubmitted && f['firstName'].invalid" />
+        </div>
+  
+        <div class="field-group">
+          <!-- <label>Last Name</label> -->
+          <input type="text" formControlName="lastName"  placeholder="Enter last name" [class.invalid]="formSubmitted && f['lastName'].invalid" />
+        </div>
+  
+        <div class="field-group">
+          <!-- <label>Email</label> -->
+          <input type="email" formControlName="email" placeholder="Enter your email" [class.invalid]="formSubmitted && f['email'].invalid" />
+        </div>
+  
+        <div class="field-group">
+          <!-- <label>Contact Number</label> -->
+          <input type="text" formControlName="contactNumber"  placeholder="Enter contact " [class.invalid]="formSubmitted && f['contactNumber'].invalid" />
+        </div>
+        
+        
+        <div class="field-group">
+          <!-- <label>Password</label> -->
+          <div class="input-wrapper">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="Enter password"
+              [class.invalid]="formSubmitted && f['password'].invalid"
+            />
+            <span class="eye-icon" (click)="togglePassword()">
+              <img src="assets/icons/eye-black.svg" alt="Toggle Password" />
+            </span>
+          </div>
+        </div>
+        
+        <div class="field-group">
+          <!-- <label>Confirm Password</label> -->
+          <div class="input-wrapper">
+            <input
+              [type]="showConfirmPassword ? 'text' : 'password'"
+              formControlName="confirmPassword"
+              placeholder="Re-enter password"
+              [class.invalid]="formSubmitted && (f['confirmPassword'].invalid || signupForm.errors?.['passwordMismatch'])"
+            />
+            <span class="eye-icon" (click)="toggleConfirmPassword()">
+              <img src="assets/icons/eye-black.svg" alt="Toggle Password" />
+            </span>
+          </div>
+        </div>
+        
+  
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+          <!-- Your inputs here -->
+          <button type="submit" class="login-btn">Create Account</button>
+        </form>
+        
+      </form>
+  
+      <p class="or-text">By continuing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+    </div>
+  </div>
+  

@@ -1,0 +1,73 @@
+<div class="page-wrapper">
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="assets/icons/logo.png" alt="PetalCare Logo" class="logo-icon" />
+      <span class="logo-text">PetalCare</span>
+    </div>
+  </nav>
+  
+    <div class="login-card">
+      <button class="back-btn" (click)="goToLogin()">← Back to Login</button>
+  
+      <h2>Register</h2>
+  
+      <form [formGroup]="therapistForm" (ngSubmit)="onSubmit()">
+        <div class="field-group dual">
+          <input type="text" formControlName="firstName" placeholder="First Name*" [class.invalid]="submitted && f['firstName'].invalid" />
+          <input type="text" formControlName="lastName" placeholder="Last Name*" [class.invalid]="submitted && f['lastName'].invalid" />
+        </div>
+  
+        <div class="field-group">
+          <input type="email" formControlName="email" placeholder="E-mail*" [class.invalid]="submitted && f['email'].invalid" />
+          <button type="button" class="otp-btn" (click)="sendOtp()">Send OTP</button>
+        </div>
+  
+        <div class="field-group">
+          <input type="text" formControlName="contactNumber" placeholder="Contact Number*" [class.invalid]="submitted && f['contactNumber'].invalid" />
+        </div>
+  
+        <div class="field-group">
+          <input type="text" formControlName="licenceNumber" placeholder="Licence Number*" [class.invalid]="submitted && f['licenceNumber'].invalid" />
+        </div>
+  
+        <div class="field-group">
+            <select formControlName="speciality" class="styled-select" [class.invalid]="submitted && f['speciality'].invalid">
+              <option value="" disabled selected hidden>Select your speciality</option>
+              <option *ngFor="let spec of specialities" [value]="spec">{{ spec }}</option>
+            </select>
+          </div>
+          
+        <div class="field-group">
+          <input type="number" formControlName="experience" placeholder="Experience (in years)*" [class.invalid]="submitted && f['experience'].invalid" />
+        </div>
+  
+        <div class="field-group dual">
+          <input type="text" formControlName="country" placeholder="Country*" [class.invalid]="submitted && f['country'].invalid" />
+          <input type="text" formControlName="city" placeholder="City*" [class.invalid]="submitted && f['city'].invalid" />
+        </div>
+  
+        <div class="field-group">
+          <input type="text" formControlName="pincode" placeholder="Pincode*" [class.invalid]="submitted && f['pincode'].invalid" />
+        </div>
+  
+        <div class="field-group">
+          <input type="text" formControlName="address" placeholder="Address*" [class.invalid]="submitted && f['address'].invalid" />
+        </div>
+  
+        <div class="field-group password-wrapper">
+          <input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Password*" [class.invalid]="submitted && f['password'].invalid" />
+          <span class="eye-icon" (click)="togglePassword()"><img src="assets/icons/eye-black.svg" /></span>
+        </div>
+  
+        <div class="field-group password-wrapper">
+          <input [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmPassword" placeholder="Confirm Password*" [class.invalid]="submitted && (f['confirmPassword'].invalid || therapistForm.errors?.['passwordMismatch'])" />
+          <span class="eye-icon" (click)="toggleConfirmPassword()"><img src="assets/icons/eye-black.svg" /></span>
+        </div>
+  
+        <button type="submit" class="login-btn">Create Account</button>
+      </form>
+  
+      <p class="or-text">By continuing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+    </div>
+  </div>
+  

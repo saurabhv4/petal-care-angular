@@ -1,0 +1,37 @@
+<div class="page-wrapper">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">PetalCare</div>
+    </nav>
+  
+    <!-- Card -->
+    <div class="login-card">
+      <button class="top-back-btn" (click)="goBack()">←</button>
+  
+      <h2>Verify Account</h2>
+      <p class="subtitle">
+        Code has been sent to <strong>{{ email }}</strong><br />
+        Enter the code to verify your account.
+      </p>
+  
+      <form [formGroup]="otpForm" (ngSubmit)="onSubmit()">
+        <label for="otp">Enter Code</label>
+        <input
+          type="text"
+          id="otp"
+          formControlName="otp"
+          placeholder="6 Digit Code"
+          maxlength="6"
+          [class.invalid]="submitted && otpForm.get('otp')?.invalid"
+        />
+  
+        <button type="submit" class="login-btn">Verify Account</button>
+      </form>
+  
+      <p class="resend-wrapper">
+        Didn't receive the code?
+        <a (click)="resendCode()">Resend Code</a>
+      </p>
+    </div>
+  </div>
+  

@@ -1,0 +1,175 @@
+.page-wrapper {
+    background: linear-gradient(to bottom right, #dbeafe, #f0fdf4);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .navbar {
+    width: 100%;
+    padding: 16px 32px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .logo-icon {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+  }
+  
+  .logo-text {
+    font-size: 28px;
+    font-weight: 600;
+    color: teal;
+  }
+  
+  
+.logo {
+    font-size: 40px;
+    font-weight: bold;
+    color: teal;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* space between icon and text */
+  }
+  
+  .login-card {
+    background: white;
+    margin-top: 40px;
+    padding: 40px 30px;
+    border-radius: 20px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .login-card h2 {
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  
+  .back-btn {
+    background: none;
+    border: none;
+    color: teal;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: left;
+    margin-bottom: 8px;
+  }
+  .back-btn:hover {
+    text-decoration: underline;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+    position: relative;
+  }
+  
+  label {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  
+  input {
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+    transition: border 0.2s ease;
+  }
+  
+  input:focus {
+    border-color: teal;
+  }
+  .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  input.invalid {
+    border-color: red;
+  }
+  .input-wrapper input {
+    width: 100%;
+    padding: 10px 40px 10px 10px; /* space on right for icon */
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  .input-wrapper input.invalid {
+    border-color: red;
+  }
+  
+  .password-wrapper {
+    position: relative;
+  display: flex;
+  flex-direction: column;
+  }
+  .password-wrapper input {
+    padding-right: 40px; /* Space for the eye icon on the right */
+    height: 42px;         /* Ensures consistent height */
+  }
+  
+  
+  .eye-icon {
+    position: absolute;
+    right: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .eye-icon img {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0);
+  }
+  
+  .eye-icon:hover img {
+    filter: brightness(0.5);
+  }
+  
+  .login-btn {
+    background-color: teal;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .or-text {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 20px;
+  }
+  

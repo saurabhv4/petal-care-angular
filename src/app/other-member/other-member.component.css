@@ -1,0 +1,150 @@
+.page-wrapper {
+  background: linear-gradient(to bottom right, #dbeafe, #f0fdf4);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar {
+  width: 100%;
+  padding: 20px 40px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  height: 32px;
+}
+
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: teal;
+}
+
+.login-card {
+  background: white;
+  margin-top: 40px;
+  padding: 40px 30px;
+  border-radius: 20px;
+  max-width: 440px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.login-card h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: teal;
+  cursor: pointer;
+  margin-bottom: 20px;
+  align-self: flex-start;
+}
+
+.progress-bar {
+  height: 6px;
+  width: 100%;
+  background-color: #e5e7eb;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.progress-step {
+  height: 100%;
+  background-color: teal;
+  transition: width 0.3s ease;
+}
+.step-2 {
+  width: 50%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.row {
+  display: flex;
+  gap: 15px;
+}
+
+.row input {
+  flex: 1;
+  min-width: 0;
+}
+
+input, select {
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: teal;
+}
+
+input.invalid, select.invalid {
+  border-color: red !important;
+}
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select-wrapper select {
+  appearance: none;
+  width: 100%;
+  padding: 12px;
+  padding-right: 44px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.select-wrapper::after {
+  content: "▾";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #555;
+  pointer-events: none;
+}
+
+.login-btn {
+  background-color: teal;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+}

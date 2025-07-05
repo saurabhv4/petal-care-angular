@@ -1,0 +1,110 @@
+.page-wrapper {
+    background: linear-gradient(to bottom right, #dbeafe, #f0fdf4);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .navbar {
+    width: 100%;
+    padding: 20px 40px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: teal;
+  }
+  
+  .login-card {
+    background: white;
+    margin-top: 60px;
+    padding: 50px 30px 40px;
+    border-radius: 20px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+  }
+  
+  .login-card h2 {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .subtitle {
+    font-size: 0.9rem;
+    color: #444;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  label {
+    margin-top: 10px;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  
+  input {
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+    transition: border 0.2s ease;
+  }
+  input:focus {
+    border-color: teal;
+  }
+  input.invalid {
+    border-color: red;
+  }
+  
+  .login-btn {
+    background-color: teal;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .resend-wrapper {
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 16px;
+    color: #444;
+  }
+  
+  .resend-wrapper a {
+    color: teal;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-left: 5px;
+  }
+  
+  /* back button at top left inside card */
+  .top-back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: teal;
+  }
+  
