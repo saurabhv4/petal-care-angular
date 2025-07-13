@@ -168,3 +168,9 @@
   .step-2 {
     width: 75%;
   }
+  :host ::ng-deep input.invalid, 
+  :host ::ng-deep select.invalid, 
+  :host ::ng-deep textarea.invalid {
+    border: 1.2px solid #d32f2f !important;
+    background: #fffbe6 !important; /* temporary yellow for debug */
+  }

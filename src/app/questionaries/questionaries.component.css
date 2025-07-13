@@ -1,0 +1,201 @@
+.q-page-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #dbeafe, #f0fdf4);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.q-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 1.2rem 2rem 0.7rem 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  max-width: 100vw;
+  gap: 1.2rem;
+}
+.brand-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #0097a7;
+  margin-right: 2rem;
+  flex: 0 0 auto;
+}
+.q-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #232b3b;
+  flex: 1 1 auto;
+  text-align: center;
+}
+.q-progress {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0097a7;
+  background: #e0f7fa;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  margin-left: 1rem;
+  flex: 0 0 auto;
+}
+.lang-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 1.5rem;
+  flex: 0 0 auto;
+}
+.lang-toggle button {
+  background: #f4f7fa;
+  border: none;
+  border-radius: 20px;
+  padding: 0.3rem 1.1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #232b3b;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.lang-toggle button.active, .lang-toggle button:hover {
+  background: #0097a7;
+  color: #fff;
+}
+.home-btn {
+  background: #f4f7fa;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-right: 1rem;
+}
+.home-btn:hover {
+  background: #e0f7fa;
+}
+.home-icon {
+  width: 20px;
+  height: 20px;
+}
+.q-list {
+  margin: 1.2rem auto 0 auto;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  width: 100%;
+}
+.q-card {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 1.1rem 1.2rem 0.7rem 1.2rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  cursor: pointer;
+  transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.q-card:hover {
+  border-color: #0097a7;
+  box-shadow: 0 6px 32px rgba(0,151,167,0.10);
+  background: #f0fdfb;
+}
+.q-card.answered {
+  border-color: #0097a7;
+  background: #e0f7fa;
+}
+.q-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.q-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #bdbdbd;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.q-checkbox.checked {
+  background: #0097a7;
+  border-color: #0097a7;
+}
+.q-checkmark {
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.q-number {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #232b3b;
+}
+.q-text {
+  flex: 1;
+  font-size: 1rem;
+  color: #232b3b;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.q-option {
+  font-size: 1rem;
+  color: #8a94a6;
+  margin-top: 0.2rem;
+}
+.q-option-value {
+  font-weight: 600;
+  color: #bdbdbd;
+  transition: color 0.2s;
+}
+.q-option-value.answered {
+  color: #0097a7;
+}
+@media (max-width: 600px) {
+  .q-header {
+    padding: 1.2rem 0.5rem 0.7rem 0.5rem;
+    gap: 0.5rem;
+  }
+  .brand-title {
+    font-size: 1.1rem;
+    margin-right: 0.7rem;
+  }
+  .q-title {
+    font-size: 1.1rem;
+  }
+  .q-list {
+    max-width: 98vw;
+  }
+  .q-card {
+    padding: 1rem 1rem 0.6rem 1rem;
+  }
+  .q-number {
+    font-size: 1rem;
+  }
+  .q-text {
+    font-size: 0.9rem;
+  }
+  .q-checkbox {
+    width: 18px;
+    height: 18px;
+  }
+  .q-checkmark {
+    font-size: 0.7rem;
+  }
+} 

@@ -1,0 +1,32 @@
+<div class="qdesc-page-wrapper">
+  <div class="qdesc-header">
+    <span class="brand-title">Petal Care</span>
+    <button class="back-btn" (click)="goToList()" aria-label="Go back to Questionaries">←</button>
+    <span class="qdesc-title">Question</span>
+    <span class="qdesc-progress">{{ progress }}</span>
+    <div class="lang-toggle">
+      <button [class.active]="language === 'en'" (click)="setLanguage('en')">English</button>
+      <button [class.active]="language === 'hi'" (click)="setLanguage('hi')">हिन्दी</button>
+    </div>
+  </div>
+  <div class="qdesc-card">
+    <div class="qdesc-question">{{ questionText || 'Loading...' }}</div>
+    <div class="qdesc-instruction">{{ instructionText || 'Please follow the instructions carefully.' }}</div>
+    <div class="qdesc-options">
+      <button 
+        *ngFor="let opt of options" 
+        class="qdesc-option" 
+        [class.selected]="isOptionSelected(opt.label)"
+        (click)="selectOption(opt.label)">
+        <div class="qdesc-checkbox" [class.checked]="isOptionSelected(opt.label)">
+          <span *ngIf="isOptionSelected(opt.label)" class="qdesc-checkmark">✓</span>
+        </div>
+        <span class="qdesc-option-label">{{ opt.label }}</span>
+      </button>
+    </div>
+    <div class="qdesc-nav">
+      <button class="qdesc-nav-btn" (click)="goToPrevious()" [disabled]="index === 0">Previous</button>
+      <button class="qdesc-nav-btn" (click)="goToNext()" [disabled]="index === questions.length - 1">Next</button>
+    </div>
+  </div>
+</div>

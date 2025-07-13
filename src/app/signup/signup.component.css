@@ -164,6 +164,11 @@
     cursor: pointer;
     width: 100%;
     margin-top: 10px;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .login-btn:hover:not(:disabled) {
+    background-color: #00796b;
+    box-shadow: 0 4px 16px rgba(0, 150, 136, 0.15);
   }
   
   .or-text {
@@ -172,4 +177,51 @@
     color: #888;
     margin-top: 20px;
   }
+  
+  .spinner {
+    margin: 16px auto;
+    border: 4px solid #e0e0e0;
+    border-top: 4px solid #008080;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    animation: spin 0.8s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+  }
+  
+.input-field {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.2s ease;
+  background: #fff;
+  color: #333;
+  margin-bottom: 0;
+}
+.input-field:focus {
+  border-color: teal;
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 0.95rem;
+  margin-top: 2px;
+  margin-bottom: 4px;
+}
+
+input.invalid, select.invalid, textarea.invalid {
+  border: 1.2px solid #d32f2f !important;
+  outline: none;
+}
+/* Hide error text if submitted and field is invalid */
+/* .error-message {
+  display: none;
+} */
   

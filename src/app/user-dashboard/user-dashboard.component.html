@@ -1,5 +1,72 @@
 <div class="dashboard-wrapper">
-    <h1>Welcome to Your Dashboard!</h1>
-    <p>You have successfully logged in.</p>
-    <button (click)="logout()">Logout</button>
+  <div class="dashboard-navbar">
+    <div class="navbar-logo">
+      <img src="assets/icons/logo.png" alt="PetalCare Logo" />
+      <span class="navbar-title">PetalCare</span>
+    </div>
+    <div class="navbar-menu" (click)="toggleDrawer()">
+      <span class="material-icons">menu</span>
+    </div>
   </div>
+
+  <div class="dashboard-main">
+    <div class="dashboard-greeting-card">
+      <div class="greeting-date">{{ currentDate }}</div>
+      <div class="greeting-text">Hello, <b>{{ firstName }}</b></div>
+    </div>
+
+    <div class="assessment-card">
+      <div class="assessment-content">
+        <div class="assessment-title">Complete the Early Assessment</div>
+        <div class="assessment-progress">
+          <svg width="56" height="56" viewBox="0 0 56 56">
+            <circle cx="28" cy="28" r="24" stroke="#e0e0e0" stroke-width="6" fill="none"/>
+            <circle cx="28" cy="28" r="24" stroke="#008080" stroke-width="6" fill="none" stroke-dasharray="151" stroke-dashoffset="131"/>
+          </svg>
+          <span class="assessment-percent">13%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="features-section">
+      <div class="features-title">Categories</div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="material-icons feature-icon">calendar_today</span>
+          <div class="feature-label">Appointment</div>
+        </div>
+        <div class="feature-card">
+          <span class="material-icons feature-icon">groups</span>
+          <div class="feature-label">Community</div>
+        </div>
+        <div class="feature-card">
+          <span class="material-icons feature-icon">school</span>
+          <div class="feature-label">Educational</div>
+        </div>
+        <div class="feature-card">
+          <span class="material-icons feature-icon">support_agent</span>
+          <div class="feature-label">24/7 Support</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="appointments-section">
+      <div class="appointments-title">No upcoming appointments</div>
+    </div>
+  </div>
+
+  <!-- Slide Drawer -->
+  <div class="slide-drawer" [class.open]="drawerOpen" (click)="closeDrawer()">
+    <div class="drawer-content" (click)="$event.stopPropagation()">
+      <div class="drawer-avatar">
+        <span class="material-icons">account_circle</span>
+      </div>
+      <div class="drawer-name">{{ firstName }}</div>
+      <div class="drawer-menu">
+        <div class="drawer-menu-item"><span class="material-icons">person</span> Profile</div>
+        <div class="drawer-menu-item"><span class="material-icons">history</span> Assessment History</div>
+        <div class="drawer-menu-item" (click)="logout()"><span class="material-icons">logout</span> Logout</div>
+      </div>
+    </div>
+  </div>
+</div>

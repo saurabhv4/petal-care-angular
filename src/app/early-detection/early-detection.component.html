@@ -1,0 +1,37 @@
+<div class="page-wrapper">
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="assets/icons/logo.png" alt="PetalCare Logo" class="logo-icon" />
+      <span class="logo-text">PetalCare</span>
+    </div>
+  </nav>
+
+  <div class="login-card ed-card">
+    <div class="ed-home-btn-wrapper">
+      <button class="home-btn" (click)="goToDashboard()" aria-label="Go to Dashboard">
+        <img src="assets/icons/home-icon.png" alt="Home" class="home-icon" />
+      </button>
+    </div>
+    <h2 class="ed-title">Early Detection Assessment</h2>
+    <p class="ed-desc">
+      This assessment is designed to help identify early signs of autism in children by focusing on key behavioral, social, and communication patterns. It is not a diagnostic tool but a simple, research-based questionnaire to guide awareness and early intervention. By answering a series of thoughtfully designed questions, you can gain insights into your child's developmental progress.<br><br>
+      Your responses will remain confidential and will help us provide recommendations tailored to your child's needs. Early detection is crucial for timely support, fostering better outcomes for your child's growth and learning.<br><br>
+      Take a few moments to complete the assessment, and together, let's work towards understanding and nurturing your child's potential.
+    </p>
+    <div class="ed-checkbox-card">
+      <label class="ed-checkbox-label">
+        <input type="checkbox" [(ngModel)]="agreed" />
+        <span class="checkmark"></span>
+        I agree to all the terms and conditions mentioned in here and abide by the rules for completing the assessment
+      </label>
+    </div>
+    <div class="ed-start-btn-wrapper">
+      <button class="ed-start-btn" [class.animated]="agreed && !isLoading" [disabled]="!agreed || isLoading" (click)="startAssessment()">
+        <span *ngIf="!isLoading">START</span>
+        <span *ngIf="isLoading">Loading...</span>
+        <span class="ed-anim-circle" *ngIf="agreed && !isLoading"></span>
+      </button>
+    </div>
+    <div *ngIf="errorMsg" class="ed-error-msg">{{ errorMsg }}</div>
+  </div>
+</div>

@@ -161,6 +161,16 @@ input:focus {
   margin-bottom: 20px;
   cursor: pointer;
   text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.forgot-password:hover:not(.disabled) {
+  color: #006666;
+}
+
+.forgot-password.disabled {
+  color: #ccc;
+  cursor: not-allowed;
 }
 
 .login-btn {
@@ -172,6 +182,16 @@ input:focus {
   font-size: 16px;
   cursor: pointer;
   width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.login-btn:hover:not(:disabled) {
+  background-color: #006666;
 }
 
 .or-text {
@@ -199,6 +219,11 @@ input:focus {
   transition: background 0.3s;
 }
 
+.social-buttons button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .social-buttons button img {
   width: 20px;
   height: 20px;
@@ -212,6 +237,13 @@ input:focus {
   color: red;
   margin-top: 10px;
   text-align: center;
+}
+
+.success-message {
+  color: #22c55e;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 500;
 }
 
 

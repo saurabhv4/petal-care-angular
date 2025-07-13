@@ -1,40 +1,27 @@
-// import { NgModule } from '@angular/core';
-// import { BrowserModule } from '@angular/platform-browser';
-// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { RouterModule } from '@angular/router';
-// import { AppRoutingModule } from './app-routing.module';
-// import { routes } from './app.routes';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
-// // ✅ Firebase Imports
-// import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-// import { provideAuth, getAuth } from '@angular/fire/auth';
-// import { environment } from '../environments/environment';
+// Firebase
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from '../environments/environment';
 
-// // ✅ Components
-// import { AppComponent } from './app.component';
-// import { LoginComponent } from './login/login.component';
-// import { SignupComponent } from './signup/signup.component';
-// import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
-
-// @NgModule({
-//   declarations: [
-//     AppComponent,
-//     LoginComponent,
-//     SignupComponent,
-//     VerifyOtpComponent,
-//   ],
-//   imports: [
-//     BrowserModule,
-//     FormsModule,
-//     ReactiveFormsModule,
-//     RouterModule.forRoot(routes),
-//     AppRoutingModule,
-
-//     // ✅ Firebase initialization
-//     provideFirebaseApp(() => initializeApp(environment.firebase)),
-//     provideAuth(() => getAuth())
-//   ],
-//   providers: [],
-//   bootstrap: [AppComponent]
-// })
-// export class AppModule {}
+@NgModule({
+  declarations: [AppComponent, LoginComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    CommonModule,
+    AngularFireModule.initializeApp(environment.firebase), // Initialize Firebase
+    AngularFireAuthModule, // Enable Firebase Auth
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}

@@ -176,3 +176,10 @@ textarea {
 
 .step-1 { width: 25%; }
 .step-2 { width: 100%; }
+
+.error-message {
+  color: #d32f2f;
+  font-size: 0.95rem;
+  margin-top: 2px;
+  margin-bottom: 4px;
+}

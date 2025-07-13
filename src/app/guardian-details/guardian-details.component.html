@@ -21,21 +21,22 @@
           type="date"
           formControlName="dob"
           placeholder="Select Date of Birth"
-          [class.invalid]="formSubmitted && guardianForm.get('dob')?.invalid"
+          [class.invalid]="submitted && guardianForm.get('dob')?.invalid"
+          [max]="maxDob"
+          #dobInput
         />
-  
+
         <input
           type="text"
           formControlName="occupation"
           placeholder="Enter Occupation"
-          [class.invalid]="formSubmitted && guardianForm.get('occupation')?.invalid"
+          [class.invalid]="submitted && guardianForm.get('occupation')?.invalid"
         />
-  
 
         <div class="select-wrapper">
         <select
-          formControlName="relationship"
-          [class.invalid]="formSubmitted && guardianForm.get('relationship')?.invalid"
+          formControlName="relationToChild"
+          [class.invalid]="submitted && guardianForm.get('relationToChild')?.invalid"
         >
           <option value="" disabled selected>How are you related to patient?</option>
           <option value="Parent">Father</option>
@@ -46,10 +47,10 @@
           <option value="Relative">Aunt</option>
           <option value="Relative">Other</option>
         </select>
-    </div>
-  
+        </div>
+
         <a class="add-link" (click)="addOtherGuardian()">+ Add details of other Guardian</a>
-  
+
         <button type="submit" class="login-btn">Next</button>
       </form>
     </div>

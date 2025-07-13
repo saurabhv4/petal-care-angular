@@ -14,6 +14,9 @@
         Enter the code to verify your account.
       </p>
   
+      <div *ngIf="isLoading" class="spinner"></div>
+      <div *ngIf="isLoading && !successMsg && !errorMsg" class="loading-msg">Please wait...</div>
+  
       <form [formGroup]="otpForm" (ngSubmit)="onSubmit()">
         <label for="otp">Enter Code</label>
         <input
@@ -25,13 +28,16 @@
           [class.invalid]="submitted && otpForm.get('otp')?.invalid"
         />
   
-        <button type="submit" class="login-btn">Verify Account</button>
+        <button type="submit" class="login-btn" [disabled]="isLoading">Verify Account</button>
       </form>
   
       <p class="resend-wrapper">
         Didn't receive the code?
-        <a (click)="resendCode()">Resend Code</a>
+        <a (click)="!isLoading && resendCode()" [class.disabled]="isLoading">Resend Code</a>
       </p>
     </div>
   </div>
+  
+  <div *ngIf="errorMsg" class="error-message">{{ errorMsg }}</div>
+  <div *ngIf="successMsg" class="success-message">{{ successMsg }}</div>
   

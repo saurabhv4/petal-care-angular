@@ -1,60 +1,102 @@
 <div class="page-wrapper">
-    <nav class="navbar">
-      <div class="logo-container">
-        <img src="assets/icons/logo.png" alt="PetalCare Logo" class="logo-icon" />
-        <span class="logo-text">PetalCare</span>
-      </div>
-    </nav>
-  
-    <div class="login-card">
-      <h2>Log in to your Account</h2>
-  
-      <div class="tabs">
-        <button [class.active]="selectedRole === 'user'" (click)="switchRole('user')">
-          User Login
-        </button>
-        <button [class.active]="selectedRole === 'therapist'" (click)="switchRole('therapist')">
-          Therapist Login
-        </button>
-      </div>
-      
-      
-      <a class="signup-link" [routerLink]="selectedRole === 'user' ? '/signup' : '/therapist-signup'">
-        Don't have an account? <strong>Sign Up</strong>
-      </a>
-      
-  
-      <form (ngSubmit)="login()">
-        <label>Email</label>
-        <input type="email" [(ngModel)]="email"  name="email" placeholder="Enter your email" required />
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="assets/icons/logo.png" alt="PetalCare Logo" class="logo-icon" />
+      <span class="logo-text">PetalCare</span>
+    </div>
+  </nav>
 
-  
-        <label>Password</label>
-        <div class="password-wrapper">
-          <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password" name="password" placeholder="Enter your password" required />
-          <span class="eye-icon" (click)="togglePassword()">
-            <img src="assets/icons/eye-black.svg" alt="Toggle Password" />
-          </span>
-        </div>
-        
-  
-        <button type="submit" class="login-btn">Login</button>
-      </form>
-      <div *ngIf="loginError" class="error-message">{{ loginError }}</div>
-      <a class="forgot-password" (click)="sendOtp()">Forgot Password?</a>
-  
-      <p class="or-text">or login with</p>
-  
-      <div class="social-buttons">
-        <button class="google" (click)="loginWithGoogle()">
-          <img src="assets/icons/google-icon.svg" alt="Google" />
-          Google
-        </button>
-        <button class="apple" disabled>
-          <img src="assets/icons/apple-icon.svg" alt="Apple" />
-          Apple
-        </button>
+  <div class="login-card">
+    <h2>Log in to your Account</h2>
+
+    <div class="tabs">
+      <button 
+        [class.active]="selectedRole === 'user'" 
+        (click)="switchRole('user')"
+        [disabled]="isLoading"
+      >
+        User Login
+      </button>
+      <button 
+        [class.active]="selectedRole === 'therapist'" 
+        (click)="switchRole('therapist')"
+        [disabled]="isLoading"
+      >
+        Therapist Login
+      </button>
+    </div>
+    
+    <a class="signup-link" 
+       [routerLink]="selectedRole === 'user' ? '/signup' : '/therapist-signup'"
+       [class.disabled]="isLoading">
+      Don't have an account? <strong>Sign Up</strong>
+    </a>
+
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+      <label>Email</label>
+      <input 
+        type="email" 
+        [(ngModel)]="email"  
+        name="email" 
+        placeholder="Enter your email" 
+        required
+        [disabled]="isLoading"
+      />
+
+      <label>Password</label>
+      <div class="password-wrapper">
+        <input 
+          [type]="showPassword ? 'text' : 'password'" 
+          [(ngModel)]="password" 
+          name="password" 
+          placeholder="Enter your password" 
+          required
+          [disabled]="isLoading"
+        />
+        <span class="eye-icon" (click)="togglePassword()" [class.disabled]="isLoading">
+          <img 
+            [src]="showPassword ? 'assets/icons/eye-off-black.svg' : 'assets/icons/eye-black.svg'" 
+            alt="Toggle Password" 
+          />
+        </span>
       </div>
       
+      <button 
+        type="submit" 
+        class="login-btn"
+        [disabled]="loginForm.invalid || isLoading"
+      >
+        {{ isLoading ? 'Logging in...' : 'Login' }}
+      </button>
+    </form>
+
+    <div *ngIf="loginError" class="error-message">
+      ⚠️ {{ loginError }}
+    </div>
+
+    <div *ngIf="loginSuccess" class="success-message">
+      ✅ {{ loginSuccess }}
+    </div>
+
+    <a class="forgot-password" (click)="sendOtp()" [class.disabled]="isLoading">
+      Forgot Password?
+    </a>
+
+    <p class="or-text">or login with</p>
+
+    <div class="social-buttons">
+      <button 
+        class="google" 
+        (click)="loginWithGoogle()"
+        [disabled]="isLoading"
+      >
+        <img src="assets/icons/google-icon.svg" alt="Google" />
+        {{ isLoading ? 'Signing in...' : 'Google' }}
+      </button>
+      <button class="apple" disabled>
+        <img src="assets/icons/apple-icon.svg" alt="Apple" />
+        Apple
+      </button>
     </div>
   </div>
+</div>

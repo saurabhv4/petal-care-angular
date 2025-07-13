@@ -13,37 +13,42 @@
       <button class="back-btn" (click)="goToLogin()">← Back to Login</button>
   
       <h2>Create Account</h2>
+
+      <div *ngIf="otpError" class="error-message" style="text-align:center; margin-bottom:10px;">{{ otpError }}</div>
   
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <div class="field-group">
-         
-          <input type="text" formControlName="firstName" placeholder="Enter first name"[class.invalid]="formSubmitted && f['firstName'].invalid" />
+          <input type="text" formControlName="firstName" placeholder="First Name" [class.invalid]="submitted && f['firstName'].invalid" />
         </div>
   
         <div class="field-group">
-          <!-- <label>Last Name</label> -->
-          <input type="text" formControlName="lastName"  placeholder="Enter last name" [class.invalid]="formSubmitted && f['lastName'].invalid" />
+          <input type="text" formControlName="lastName" placeholder="Last Name" [class.invalid]="submitted && f['lastName'].invalid" />
         </div>
   
         <div class="field-group">
-          <!-- <label>Email</label> -->
-          <input type="email" formControlName="email" placeholder="Enter your email" [class.invalid]="formSubmitted && f['email'].invalid" />
+          <input type="email" formControlName="emailId" placeholder="Email" [class.invalid]="submitted && f['emailId'].invalid" />
         </div>
   
         <div class="field-group">
-          <!-- <label>Contact Number</label> -->
-          <input type="text" formControlName="contactNumber"  placeholder="Enter contact " [class.invalid]="formSubmitted && f['contactNumber'].invalid" />
+          <input type="text" formControlName="mobile" placeholder="Mobile" [class.invalid]="submitted && f['mobile'].invalid" />
         </div>
         
+        <div class="field-group">
+          <select formControlName="gender" class="input-field" [class.invalid]="submitted && f['gender'].invalid">
+            <option value="" disabled selected>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
         
         <div class="field-group">
-          <!-- <label>Password</label> -->
           <div class="input-wrapper">
             <input
               [type]="showPassword ? 'text' : 'password'"
               formControlName="password"
-              placeholder="Enter password"
-              [class.invalid]="formSubmitted && f['password'].invalid"
+              placeholder="Password"
+              [class.invalid]="submitted && f['password'].invalid"
             />
             <span class="eye-icon" (click)="togglePassword()">
               <img src="assets/icons/eye-black.svg" alt="Toggle Password" />
@@ -52,13 +57,12 @@
         </div>
         
         <div class="field-group">
-          <!-- <label>Confirm Password</label> -->
           <div class="input-wrapper">
             <input
               [type]="showConfirmPassword ? 'text' : 'password'"
               formControlName="confirmPassword"
-              placeholder="Re-enter password"
-              [class.invalid]="formSubmitted && (f['confirmPassword'].invalid || signupForm.errors?.['passwordMismatch'])"
+              placeholder="Confirm Password"
+              [class.invalid]="submitted && (f['confirmPassword'].invalid || signupForm.errors?.['passwordMismatch'])"
             />
             <span class="eye-icon" (click)="toggleConfirmPassword()">
               <img src="assets/icons/eye-black.svg" alt="Toggle Password" />
@@ -67,11 +71,8 @@
         </div>
         
   
-        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-          <!-- Your inputs here -->
-          <button type="submit" class="login-btn">Create Account</button>
-        </form>
-        
+        <div *ngIf="isLoading" class="spinner"></div>
+        <button type="submit" class="login-btn" [disabled]="isLoading">Create Account</button>
       </form>
   
       <p class="or-text">By continuing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>

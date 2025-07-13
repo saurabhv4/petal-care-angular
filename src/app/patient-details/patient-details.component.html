@@ -11,14 +11,15 @@
       <div class="progress-bar"><div class="progress-step step-2"></div></div>
       <h2>Patient Details</h2>
   
-      <form [formGroup]="patientForm" (ngSubmit)="createAccount()">
+      <div *ngIf="errorMsg" style="color:#d32f2f; text-align:center; margin-bottom:10px;">{{ errorMsg }}</div>
+      <form [formGroup]="patientForm" (ngSubmit)="onSubmit(); submitted = true;">
         <div class="row">
-          <input type="text" placeholder="First Name*" formControlName="firstName" />
-          <input type="text" placeholder="Last Name*" formControlName="lastName" />
+          <input type="text" placeholder="First Name*" formControlName="firstName" [class.invalid]="submitted && patientForm.get('firstName')?.invalid" />
+          <input type="text" placeholder="Last Name*" formControlName="lastName" [class.invalid]="submitted && patientForm.get('lastName')?.invalid" />
         </div>
-  
+        
         <div class="select-wrapper">
-          <select formControlName="gender">
+          <select formControlName="gender" [class.invalid]="submitted && patientForm.get('gender')?.invalid">
             <option value="" disabled selected>Select your gender</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -26,13 +27,14 @@
           </select>
         </div>
         
-        <input type="date" formControlName="dob" placeholder="Date of Birth*" />
+        <input type="date" formControlName="dob" placeholder="Date of Birth*" [class.invalid]="submitted && patientForm.get('dob')?.invalid" />
+
         <textarea placeholder="Enter Patient Medical History" formControlName="medicalHistory"></textarea>
         <textarea placeholder="Enter Family Medical History" formControlName="familyHistory"></textarea>
-  
-        <a class="add-link">+ Add details of other Patient</a>
-  
-        <button class="login-btn">Create Account</button>
+
+        <a class="add-link" (click)="addPatient()">+ Add details of other Patient</a>
+
+        <button class="login-btn" type="submit">Create Account</button>
       </form>
     </div>
   </div>

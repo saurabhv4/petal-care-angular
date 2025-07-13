@@ -1,0 +1,26 @@
+<div class="q-page-wrapper">
+  <div class="q-header">
+    <span class="brand-title">Petal Care</span>
+    <button class="home-btn" (click)="goToDashboard()" aria-label="Go to Dashboard">
+      <img src="assets/icons/home-icon.png" alt="Home" class="home-icon" />
+    </button>
+    <h2 class="q-title">Questionaries</h2>
+    <span class="q-progress">{{ progress }}</span>
+    <div class="lang-toggle">
+      <button [class.active]="language === 'en'" (click)="$event.stopPropagation(); setLanguage('en')">English</button>
+      <button [class.active]="language === 'hi'" (click)="$event.stopPropagation(); setLanguage('hi')">हिन्दी</button>
+    </div>
+  </div>
+  <div class="q-list" #qList>
+    <div *ngFor="let q of questions; let i = index" class="q-card" [class.answered]="isAnswered(q)" (click)="goToQuestion(i)" [id]="'qcard-' + i">
+      <div class="q-row">
+        <div class="q-checkbox" [class.checked]="isAnswered(q)">
+          <span *ngIf="isAnswered(q)" class="q-checkmark">✓</span>
+        </div>
+        <span class="q-number">{{ i + 1 }}.</span>
+        <span class="q-text">{{ language === 'hi' ? (q.questionHi || q.text) : (q.questionEn || q.text) | slice:0:60 }}<span *ngIf="((language === 'hi' ? (q.questionHi || q.text) : (q.questionEn || q.text)) || '').length > 60">...</span></span>
+      </div>
+      <div class="q-option">Option selected: <span class="q-option-value" [class.answered]="isAnswered(q)">{{ q.selectedOption || '-' }}</span></div>
+    </div>
+  </div>
+</div> 
