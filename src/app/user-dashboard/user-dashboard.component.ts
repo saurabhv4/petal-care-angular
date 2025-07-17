@@ -66,6 +66,11 @@ export class UserDashboardComponent implements OnInit {
     this.drawerOpen = false;
   }
 
+  navigateToProfile() {
+    this.closeDrawer();
+    this.router.navigate(['/user-profile']);
+  }
+
   logout() {
     // Clear all authentication data
     localStorage.removeItem('authToken');

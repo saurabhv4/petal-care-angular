@@ -17,6 +17,10 @@ import { CreateNewPasswordComponent } from './create-new-password/create-new-pas
 import { EarlyDetectionComponent } from './early-detection/early-detection.component';
 import { QuestionariesComponent } from './questionaries/questionaries.component';
 import { QuestionDescComponent } from './questiondesc/questiondesc.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AdditionalObservationComponent } from './additional-observation/additional-observation.component';
+import { ResultComponent } from './result/result.component';
+import { TherapistAppointmentsComponent } from './therapist-appointments/therapist-appointments.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -42,5 +46,9 @@ export const routes: Routes = [
   { path: 'create-new-password', component: CreateNewPasswordComponent }, // Add create new password route
   { path: 'early-detection', component: EarlyDetectionComponent },
   { path: 'questionaries', component: QuestionariesComponent },
-  { path: 'questiondesc/:index', component: QuestionDescComponent }
+  { path: 'questiondesc/:index', component: QuestionDescComponent },
+  { path: 'user-profile', component: UserProfileComponent },
+  { path: 'additional-observation', component: AdditionalObservationComponent },
+  { path: 'result', component: ResultComponent },
+  { path: 'therapist-appointments', component: TherapistAppointmentsComponent },
 ];

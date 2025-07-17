@@ -1,11 +1,17 @@
+body, .dashboard-bg {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #dbeafe, #f0fdf4);
+}
+
 .dashboard-wrapper {
   min-height: 100vh;
-  background: #fafbfc;
+  background: transparent;
   padding: 0 0 32px 0;
   font-family: 'Inter', Arial, sans-serif;
-  max-width: 480px;
+  max-width: 600px;
   margin: 0 auto;
 }
+
 .dashboard-header {
   display: flex;
   justify-content: space-between;
@@ -136,23 +142,25 @@
   box-shadow: 0 4px 16px rgba(0,128,128,0.10);
 }
 .features-section {
-  margin: 0 0 28px 0;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  margin-bottom: 24px;
+  padding: 24px 24px 18px 24px;
 }
 .features-title {
   font-size: 18px;
   font-weight: 600;
   color: #222;
-  margin-left: 4px;
   margin-bottom: 12px;
 }
 .features-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  margin: 0 0 0 0;
 }
 .feature-card {
-  background: #fff;
+  background: #f7fafc;
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.03);
   padding: 18px 6px 10px 6px;
@@ -168,7 +176,7 @@
 }
 .feature-card:hover {
   box-shadow: 0 4px 16px rgba(0,128,128,0.10);
-  background: #f0fdf4;
+  background: #e0f7fa;
   border: 1.5px solid #00808033;
 }
 .feature-icon {
@@ -185,7 +193,11 @@
   white-space: nowrap;
 }
 .appointments-section {
-  margin: 0 0 24px 0;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  margin-bottom: 24px;
+  padding: 24px 24px 18px 24px;
 }
 .appointments-title {
   font-size: 16px;
@@ -269,6 +281,11 @@
 .drawer-menu-item:hover {
   background: rgba(255,255,255,0.12);
 }
+
+.drawer-menu-item:active {
+  background: rgba(255,255,255,0.20);
+  transform: scale(0.98);
+}
 .drawer-menu-item .material-icons {
   font-size: 24px;
 }
@@ -284,6 +301,7 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  border-radius: 0 0 18px 18px;
 }
 .navbar-logo {
   display: flex;
@@ -324,14 +342,9 @@
   padding: 24px 0 0 0;
 }
 .dashboard-greeting-card {
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  padding: 18px 24px 12px 24px;
-  margin-bottom: 18px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 .greeting-date {
   color: #b0b0b0;
@@ -343,6 +356,11 @@
   font-weight: 600;
   color: #222;
 }
+.assessment-progress svg circle[stroke="#008080"] {
+  stroke: #008080;
+}
+
+/* Responsive Design */
 @media (max-width: 600px) {
   .dashboard-wrapper {
     padding: 0;
@@ -355,11 +373,8 @@
   .dashboard-main {
     padding: 12px 0 0 0;
   }
-  .dashboard-greeting-card {
+  .dashboard-greeting-card, .assessment-card, .features-section, .appointments-section {
     padding: 12px 10px 8px 10px;
-  }
-  .assessment-card {
-    padding: 14px 10px 10px 10px;
   }
   .features-grid {
     gap: 6px;

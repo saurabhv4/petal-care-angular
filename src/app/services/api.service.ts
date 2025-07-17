@@ -81,6 +81,86 @@ export class ApiService {
   }
 
   /**
+   * Therapist login with email and password
+   */
+  therapistLogin(email: string, password: string): Observable<any> {
+    const url = this.getUrl(this.endpoints.therapistLogin);
+    const body = { email, password };
+    return this.http.post(url, body, { headers: this.getHeaders() });
+  }
+
+  /**
+   * Therapist Google Signin (GET for login, POST for signup/OTP)
+   */
+  therapistGoogleSignin(emailId: string, data?: any): Observable<any> {
+    const url = `${this.getUrl(this.endpoints.therapistGoogleSignin)}?emailId=${encodeURIComponent(emailId)}`;
+    if (data) {
+      return this.http.post(url, data, { headers: this.getHeaders() });
+    } else {
+      return this.http.get(url, { headers: this.getHeaders() });
+    }
+  }
+
+  /**
+   * Therapist signup (POST to google-signin endpoint)
+   */
+  therapistSignup(data: any): Observable<any> {
+    return this.therapistGoogleSignin(data.emailId, data);
+  }
+
+  /**
+   * Therapist signup with OTP verification
+   */
+  therapistSignupWithOtp(data: any, otp: string): Observable<any> {
+    const url = `${this.getUrl(this.endpoints.therapistSignup)}?otp=${encodeURIComponent(otp)}`;
+    return this.http.post(url, data, { headers: this.getHeaders() });
+  }
+
+  /**
+   * Therapist send OTP (POST to google-signin endpoint)
+   */
+  therapistSendOtp(data: any): Observable<any> {
+    return this.therapistGoogleSignin(data.emailId, data);
+  }
+
+  /**
+   * Fetch user profile with token
+   */
+  fetchUserProfile(token: string): Observable<any> {
+    const url = this.getUrl(this.endpoints.fetchUserProfile);
+    const headers = this.getHeaders().set('Authorization', `Bearer ${token}`);
+    console.log('🔍 Fetching user profile...');
+    console.log('📍 URL:', url);
+    console.log('🔑 Token:', token);
+    return this.http.get(url, { headers });
+  }
+
+  /**
+   * Update user profile with token
+   */
+  updateUserProfile(token: string, profileData: any): Observable<any> {
+    const url = this.getUrl(this.endpoints.updateUserProfile);
+    const headers = this.getHeaders().set('Authorization', `Bearer ${token}`);
+    console.log('📝 Updating user profile...');
+    console.log('📍 URL:', url);
+    console.log('🔑 Token:', token);
+    console.log('📦 Data:', profileData);
+    return this.http.put(url, profileData, { headers });
+  }
+
+  /**
+   * Fetch patient details with token
+   */
+  fetchPatientDetails(token: string): Observable<any> {
+    const url = this.getUrl(this.endpoints.fetchPatientDetails);
+    const headers = this.getHeaders().set('Authorization', `Bearer ${token}`);
+    console.log('🔍 Fetching patient details...');
+    console.log('📍 URL:', url);
+    console.log('🔑 Token:', token);
+    return this.http.get(url, { headers });
+  }
+
+  /**
    * Get current API configuration for debugging
    */
   getApiConfig() {

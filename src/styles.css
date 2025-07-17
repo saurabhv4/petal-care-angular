@@ -1,17 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 /* Global background for entire app */
-/* body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(120deg, #e0f7fa, #ffffff);
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+html, body {
+  min-height: 100vh;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom right, #dbeafe, #f0fdf4) !important;
+}
   
   
   .page-container {
@@ -20,5 +15,14 @@
     align-items: center;
     min-height: 100vh;
   }
-   */
+  
+  
+  .profile-container {
+    background: none;
+  }
+  
+  
+  .dashboard-bg {
+    background: none;
+  }
   

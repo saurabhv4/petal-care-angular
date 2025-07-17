@@ -31,10 +31,49 @@
   background: #dc2626;
 }
 
+/* Navbar styles for PetalCare branding */
+.navbar {
+  width: 100%;
+  padding: 16px 32px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-icon {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+.logo-text {
+  font-size: 24px;
+  font-weight: 600;
+  color: teal;
+}
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.user-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
 .dashboard-content {
-  padding: 2rem;
-  max-width: 1200px;
+  padding: 2.5rem 1rem 2rem 1rem;
+  max-width: 1100px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .welcome-section {
@@ -53,19 +92,32 @@
 }
 
 .dashboard-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: nowrap;
 }
-
 .card {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   background: white;
-  padding: 1.5rem;
+  padding: 1.5rem 1.2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: box-shadow 0.2s, transform 0.2s;
+  margin: 0;
+  height: 180px;
+  justify-content: flex-start;
 }
-
 .card:hover {
   transform: translateY(-2px);
 }
@@ -78,4 +130,94 @@
 .card p {
   color: #6b7280;
   margin: 0;
+}
+
+.card-clickable {
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.card-clickable:hover {
+  box-shadow: 0 8px 24px rgba(0, 128, 128, 0.13), 0 2px 4px rgba(0,0,0,0.07);
+  transform: translateY(-2px) scale(1.03);
+  border-color: #00808033;
+}
+
+@media (max-width: 1100px) {
+  .dashboard-cards {
+    flex-wrap: wrap;
+    gap: 1.2rem;
+  }
+  .card {
+    max-width: 100%;
+    height: auto;
+  }
+}
+@media (max-width: 700px) {
+  .dashboard-cards {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .dashboard-content {
+    padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+  }
+  .logo-text {
+    font-size: 18px;
+  }
+  .logo-icon {
+    height: 36px;
+  }
+  .card {
+    height: auto;
+  }
+}
+
+/* Appointment form styles */
+.appointment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 1.2rem;
+}
+.appointment-form input,
+.appointment-form select {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
+.appointment-form button {
+  background: teal;
+  color: white;
+  border: none;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background 0.2s;
+}
+.appointment-form button:hover {
+  background: #006666;
+}
+
+/* Availability table styles */
+.availability-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 14px;
+}
+.availability-table th, .availability-table td {
+  border: 1px solid #e5e7eb;
+  padding: 8px 6px;
+  text-align: center;
+}
+.availability-table th {
+  background: #f0fdf4;
+  color: teal;
+  font-weight: 600;
+}
+.availability-table tr:nth-child(even) {
+  background: #f9fafb;
 } 

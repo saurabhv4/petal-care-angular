@@ -45,13 +45,24 @@ export class LoginComponent {
       console.log('Attempting login with:', { email: this.email, role: this.selectedRole });
       console.log('API Config:', this.apiService.getApiConfig());
       
-      const response = await this.apiService.login(this.email, this.password).toPromise();
+      let response: any;
+      if (this.selectedRole === 'therapist') {
+        response = await this.apiService.therapistLogin(this.email, this.password).toPromise();
+      } else {
+        response = await this.apiService.login(this.email, this.password).toPromise();
+      }
 
       console.log('Login response:', response);
 
       if (response?.token) {
         localStorage.setItem('authToken', response.token);
         localStorage.setItem('userRole', this.selectedRole);
+        if (response.therapistId) {
+          localStorage.setItem('therapistId', response.therapistId);
+        }
+        if (response.name || response.userName) {
+          localStorage.setItem('userName', response.name || response.userName);
+        }
         
         console.log('Login successful, navigating to dashboard...');
         
@@ -91,74 +102,60 @@ export class LoginComponent {
         throw new Error('No email found from Google login');
       }
 
-      try {
-        // Check if user exists using the API
-        console.log('Checking if user exists with email:', userEmail);
-        
-        // Try POST first, if it fails, try GET
-        let userCheckResponse: any;
+      if (this.selectedRole === 'therapist') {
+        // Therapist Google login: use therapistGoogleSignin POST
+        // You may want to collect more info for a real signup, here we use minimal info
+        const therapistObj = {
+          emailId: userEmail,
+          name: result.user.displayName || '',
+          password: 'GoogleAuth',
+          yearsOfExperience: 0,
+          specialist: '',
+          registrationNo: '',
+          address: '',
+          phoneNumber: ''
+        };
         try {
-          userCheckResponse = await this.apiService.checkUser(userEmail).toPromise();
-          console.log('POST request successful');
-        } catch (postError) {
-          console.log('POST request failed, trying GET...');
-          userCheckResponse = await this.apiService.checkUserGet(userEmail).toPromise();
-          console.log('GET request successful');
+          const response = await this.apiService.therapistGoogleSignin(userEmail, therapistObj).toPromise();
+          if (response?.token) {
+            localStorage.setItem('authToken', response.token);
+            localStorage.setItem('userRole', this.selectedRole);
+            localStorage.setItem('userEmail', userEmail);
+            if (response.therapistId) {
+              localStorage.setItem('therapistId', response.therapistId);
+            }
+            if (response.name || response.userName) {
+              localStorage.setItem('userName', response.name || response.userName);
+            }
+            localStorage.setItem('googleAuth', 'true');
+            window.location.href = '/therapist-dashboard';
+          } else {
+            this.loginError = response?.message || 'Therapist not found. Please sign up first.';
+            this.router.navigate(['/therapist-signup']);
+          }
+        } catch (err: any) {
+          this.loginError = err?.error?.message || 'Therapist not found. Please sign up first.';
+          this.router.navigate(['/therapist-signup']);
         }
+        return;
+      }
 
-        console.log('User check response:', userCheckResponse);
-
+      // User Google login: use checkUser
+      try {
+        const userCheckResponse = await this.apiService.checkUser(userEmail).toPromise();
         if (userCheckResponse?.exists) {
-          // User exists, store info and navigate
           localStorage.setItem('userRole', this.selectedRole);
           localStorage.setItem('userEmail', userEmail);
           localStorage.setItem('userName', result.user.displayName || '');
           localStorage.setItem('googleAuth', 'true');
-          
-          console.log('User exists, navigating to dashboard...');
-          
-          // Use window.location for hard navigation
-          if (this.selectedRole === 'user') {
-            window.location.href = '/user-dashboard';
-          } else {
-            window.location.href = '/therapist-dashboard';
-          }
-        } else {
-          // User doesn't exist
-          this.loginError = 'User does not exist. Please sign up first.';
-          console.log('User does not exist in backend');
-        }
-      } catch (apiError: any) {
-        console.error('API check failed:', apiError);
-        console.error('API Error details:', {
-          status: apiError.status,
-          statusText: apiError.statusText,
-          error: apiError.error,
-          message: apiError.message,
-          url: apiError.url
-        });
-        
-        // If API fails, we can either:
-        // Option 1: Allow login anyway (for testing)
-        // Option 2: Show error message
-        
-        // For now, let's allow the login to proceed if the API fails
-        // This is useful for testing when the API might be down
-        console.log('API check failed, allowing login to proceed...');
-        
-        localStorage.setItem('userRole', this.selectedRole);
-        localStorage.setItem('userEmail', userEmail);
-        localStorage.setItem('userName', result.user.displayName || '');
-        localStorage.setItem('googleAuth', 'true');
-        
-        console.log('Proceeding with login despite API failure...');
-        
-        // Use window.location for hard navigation
-        if (this.selectedRole === 'user') {
           window.location.href = '/user-dashboard';
         } else {
-          window.location.href = '/therapist-dashboard';
+          this.loginError = 'User does not exist. Please sign up first.';
+          this.router.navigate(['/signup']);
         }
+      } catch (apiError: any) {
+        this.loginError = apiError?.error?.message || 'User does not exist. Please sign up first.';
+        this.router.navigate(['/signup']);
       }
     } catch (error: unknown) {
       console.error('Google login failed:', error);

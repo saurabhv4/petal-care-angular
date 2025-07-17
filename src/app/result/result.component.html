@@ -1,0 +1,11 @@
+<div class="result-container">
+  <h2 class="result-title">Assessment Result</h2>
+  <div *ngIf="result; else noResult">
+    <pre class="result-json">{{ result | json }}</pre>
+    <!-- You can customize this to show specific fields from the result -->
+  </div>
+  <ng-template #noResult>
+    <p>No result data found. Please complete the assessment.</p>
+  </ng-template>
+  <button class="dashboard-btn" (click)="goToDashboard()">Back to Dashboard</button>
+</div>

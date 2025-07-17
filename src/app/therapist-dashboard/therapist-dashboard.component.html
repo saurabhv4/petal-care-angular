@@ -1,29 +1,41 @@
-<div class="dashboard-container">
-  <header class="dashboard-header">
-    <h1>Therapist Dashboard</h1>
-    <button (click)="logout()" class="logout-btn">Logout</button>
-  </header>
-  
+<div class="page-wrapper">
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="assets/icons/logo.png" alt="PetalCare Logo" class="logo-icon" />
+      <span class="logo-text">PetalCare</span>
+    </div>
+    <div class="navbar-user">
+      <span class="user-name">{{ userName }}</span>
+      <button (click)="logout()" class="logout-btn">Logout</button>
+    </div>
+  </nav>
+
   <main class="dashboard-content">
     <div class="welcome-section">
       <h2>Welcome, {{ userName }}!</h2>
-      <p>Manage your appointments and patient care from here.</p>
+      <p>Your therapist dashboard</p>
     </div>
-    
+    <!-- <div class="therapist-info" style="margin: 0 auto 1.5rem auto; text-align: center; color: #555; font-size: 15px;">
+      <div><strong>Name:</strong> {{ userName }}</div>
+      <div><strong>Token:</strong> {{ token }}</div>
+      <div><strong>Therapist ID:</strong> {{ therapistId }}</div>
+    </div> -->
     <div class="dashboard-cards">
-      <div class="card">
-        <h3>Today's Appointments</h3>
-        <p>No appointments scheduled for today.</p>
+      <div class="card card-clickable" (click)="goToAppointments()">
+        <h3>Appointment</h3>
+        <p>View and manage your appointments and availability.</p>
       </div>
-      
       <div class="card">
-        <h3>Patient Records</h3>
-        <p>Access and manage patient information.</p>
+        <h3>Patient List</h3>
+        <p>Access and manage your patients.</p>
       </div>
-      
       <div class="card">
-        <h3>Schedule</h3>
-        <p>View and manage your availability.</p>
+        <h3>Blog</h3>
+        <p>Share and read therapy-related articles.</p>
+      </div>
+      <div class="card">
+        <h3>24/7 Support</h3>
+        <p>Get help and support anytime.</p>
       </div>
     </div>
   </main>

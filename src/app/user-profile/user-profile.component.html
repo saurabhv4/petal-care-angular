@@ -1,0 +1,246 @@
+<div class="profile-container">
+  <!-- Header -->
+  <div class="profile-header">
+    <div class="header-content">
+      <button class="back-button" (click)="goBack()">
+        <span class="material-icons">arrow_back</span>
+        Back to Dashboard
+      </button>
+      <h1 class="profile-title">User Profile Details</h1>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>Loading profile information...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="errorMessage && !isLoading" class="error-container">
+    <div class="error-icon">
+      <span class="material-icons">error_outline</span>
+    </div>
+    <h3>Error Loading Profile</h3>
+    <p>{{ errorMessage }}</p>
+    <button class="retry-button" (click)="loadUserProfile()">
+      <span class="material-icons">refresh</span>
+      Try Again
+    </button>
+  </div>
+
+  <!-- Profile Content -->
+  <div *ngIf="userProfile && !isLoading" class="profile-content">
+    <!-- Profile Card -->
+    <div class="profile-card">
+      <div class="profile-avatar">
+        <span class="material-icons">account_circle</span>
+      </div>
+      <div class="profile-name">
+        <h2>{{ userProfile.firstName }} {{ userProfile.lastName }}</h2>
+        <p class="profile-email">{{ userProfile.emailId }}</p>
+      </div>
+      <div class="profile-status" [class.active]="userProfile.isActive">
+        <span class="status-dot"></span>
+        {{ userProfile.isActive ? 'Active' : 'Inactive' }}
+      </div>
+    </div>
+
+    <!-- Profile Details -->
+    <div class="profile-details">
+      <div class="details-section">
+        <h3 class="section-title">Personal Information</h3>
+        <div class="details-grid">
+          <div class="detail-item">
+            <div class="detail-label">
+              <span class="material-icons">person</span>
+              Full Name
+            </div>
+            <div class="detail-value">{{ userProfile.firstName }} {{ userProfile.lastName }}</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-label">
+              <span class="material-icons">email</span>
+              Email Address
+            </div>
+            <div class="detail-value">{{ userProfile.emailId }}</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-label">
+              <span class="material-icons">phone</span>
+              Mobile Number
+            </div>
+            <div class="detail-value">
+              <div *ngIf="!isEditingPhone" class="phone-display">
+                {{ userProfile.mobile || 'Not provided' }}
+                <button class="edit-button" (click)="startEditPhone()">
+                  <span class="material-icons">edit</span>
+                </button>
+              </div>
+              <div *ngIf="isEditingPhone" class="phone-edit">
+                <input 
+                  type="tel" 
+                  [(ngModel)]="editedPhone" 
+                  placeholder="Enter phone number"
+                  class="phone-input"
+                  [disabled]="isUpdating"
+                >
+                <div class="edit-actions">
+                  <button class="save-button" (click)="savePhoneNumber()" [disabled]="isUpdating">
+                    <span class="material-icons">{{ isUpdating ? 'hourglass_empty' : 'check' }}</span>
+                  </button>
+                  <button class="cancel-button" (click)="cancelEditPhone()" [disabled]="isUpdating">
+                    <span class="material-icons">close</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-label">
+              <span class="material-icons">wc</span>
+              Gender
+            </div>
+            <div class="detail-value">{{ getGenderDisplay(userProfile.gender) }}</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-label">
+              <span class="material-icons">cake</span>
+              Date of Birth
+            </div>
+            <div class="detail-value">{{ formatDate(userProfile.dob) }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="details-section">
+        <h3 class="section-title">Professional Information</h3>
+        <div class="details-grid">
+          <div class="detail-item">
+            <div class="detail-label">
+              <span class="material-icons">work</span>
+              Occupation
+            </div>
+            <div class="detail-value">{{ userProfile.occupation || 'Not specified' }}</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-label">
+              <span class="material-icons">family_restroom</span>
+              Relation to Child
+            </div>
+            <div class="detail-value">{{ userProfile.relationToChild || 'Not specified' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="details-section">
+        <h3 class="section-title">Account Information</h3>
+        <div class="details-grid">
+          <div class="detail-item">
+            <div class="detail-label">
+              <span class="material-icons">badge</span>
+              User ID
+            </div>
+            <div class="detail-value">{{ userProfile.userId }}</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-label">
+              <span class="material-icons">verified_user</span>
+              Account Status
+            </div>
+            <div class="detail-value">
+              <span class="status-badge" [class.active]="userProfile.isActive">
+                {{ userProfile.isActive ? 'Active' : 'Inactive' }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Patient Details Section -->
+      <div class="details-section">
+        <h3 class="section-title">Patient Information</h3>
+        <div class="patients-grid" *ngIf="userProfile.patients && userProfile.patients.length > 0">
+          <div class="patient-card" *ngFor="let patient of userProfile.patients; let i = index">
+            <div class="patient-header">
+              <div class="patient-avatar">
+                <span class="material-icons">child_care</span>
+              </div>
+              <div class="patient-info">
+                <h4 class="patient-name">{{ getPatientDisplayName(patient) }}</h4>
+                <p class="patient-id" *ngIf="patient.id">ID: {{ patient.id }}</p>
+              </div>
+            </div>
+            
+            <div class="patient-details">
+              <div class="patient-detail-row">
+                <div class="patient-detail-item">
+                  <div class="detail-label">
+                    <span class="material-icons">wc</span>
+                    Gender
+                  </div>
+                  <div class="detail-value">{{ getGenderDisplay(patient.gender) }}</div>
+                </div>
+                
+                <div class="patient-detail-item">
+                  <div class="detail-label">
+                    <span class="material-icons">cake</span>
+                    Date of Birth
+                  </div>
+                  <div class="detail-value">{{ formatDate(patient.dob) }}</div>
+                </div>
+              </div>
+              
+              <div class="patient-detail-row">
+                <div class="patient-detail-item">
+                  <div class="detail-label">
+                    <span class="material-icons">person</span>
+                    Age
+                  </div>
+                  <div class="detail-value">{{ calculateAge(patient.dob) }} years</div>
+                </div>
+              </div>
+              
+              <div class="patient-detail-item full-width" *ngIf="patient.patientMedicalHistory">
+                <div class="detail-label">
+                  <span class="material-icons">medical_services</span>
+                  Medical History
+                </div>
+                <div class="detail-value">{{ patient.patientMedicalHistory || 'Not specified' }}</div>
+              </div>
+              
+              <div class="patient-detail-item full-width" *ngIf="patient.familyMedicalHistory">
+                <div class="detail-label">
+                  <span class="material-icons">family_restroom</span>
+                  Family Medical History
+                </div>
+                <div class="detail-value">{{ patient.familyMedicalHistory || 'Not specified' }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- No Patients Message -->
+        <div class="no-patients-message" *ngIf="!userProfile.patients || userProfile.patients.length === 0">
+          <div class="no-patients-icon">
+            <span class="material-icons">child_care</span>
+          </div>
+          <h4>No Patients Found</h4>
+          <p>No patient information is currently available. Patients will appear here once they are added to your account.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Update Message -->
+  <div *ngIf="updateMessage" class="update-message" [class.success]="updateMessage.includes('successfully')" [class.error]="updateMessage.includes('Failed')">
+    <span class="material-icons">{{ updateMessage.includes('successfully') ? 'check_circle' : 'error' }}</span>
+    {{ updateMessage }}
+  </div>
+</div> 

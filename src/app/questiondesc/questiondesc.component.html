@@ -26,7 +26,13 @@
     </div>
     <div class="qdesc-nav">
       <button class="qdesc-nav-btn" (click)="goToPrevious()" [disabled]="index === 0">Previous</button>
-      <button class="qdesc-nav-btn" (click)="goToNext()" [disabled]="index === questions.length - 1">Next</button>
+      <button
+        class="qdesc-nav-btn"
+        (click)="goToNext()"
+        [disabled]="!selectedOption"
+      >
+        {{ index === questions.length - 1 ? 'Finish' : 'Next' }}
+      </button>
     </div>
   </div>
 </div>

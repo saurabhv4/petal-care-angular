@@ -7,7 +7,9 @@ export const environment = {
       googleAuth: '/api/v1/auth/google',
       checkUser: '/api/v1/auth/chk-usr',
       sendOtp: '/api/v1/auth/send-otp',
-      verifyOtp: '/api/v1/auth/verify-otp'
+              verifyOtp: '/api/v1/auth/verify-otp',
+        fetchUserProfile: '/api/v1/profile/fetch-user',
+        updateUserProfile: '/api/v1/profile/update-details'
     }
   },
   firebase: {

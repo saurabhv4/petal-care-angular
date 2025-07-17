@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-therapist-dashboard',
@@ -16,8 +18,13 @@ export class TherapistDashboardComponent implements OnInit {
   isAuthenticated$: Observable<boolean>;
   isAuthenticated = false;
   userName = '';
+  token = '';
+  therapistId = '';
 
-  constructor(private router: Router, private authService: AuthService) {
+  // Remove all appointment-related state and methods
+  // (No appointment form state, no availabilities, no addAvailability/fetchAvailabilities)
+
+  constructor(private router: Router, private authService: AuthService, private http: HttpClient) {
     this.isAuthenticated$ = this.authService.isAuthenticated$;
   }
 
@@ -28,12 +35,16 @@ export class TherapistDashboardComponent implements OnInit {
     const userEmail = localStorage.getItem('userEmail');
     const userName = localStorage.getItem('userName');
     const userRole = localStorage.getItem('userRole');
+    const therapistId = localStorage.getItem('therapistId');
 
     // Check if user is authenticated and has therapist role
     if ((authToken || (googleAuth === 'true' && userEmail)) && userRole === 'therapist') {
       this.isAuthenticated = true;
       this.userName = userName || userEmail || 'Therapist';
+      this.token = authToken || '';
+      this.therapistId = therapistId || '';
       console.log('Therapist authenticated via:', authToken ? 'JWT Token' : 'Google Auth');
+      console.log('Therapist Dashboard Data:', { name: this.userName, token: this.token, therapistId: this.therapistId });
     } else if (authToken || (googleAuth === 'true' && userEmail)) {
       // User is authenticated but not a therapist, redirect to user dashboard
       console.log('User is not a therapist, redirecting to user dashboard');
@@ -50,6 +61,12 @@ export class TherapistDashboardComponent implements OnInit {
         }
       });
     }
+  }
+
+  // Remove addAvailability and fetchAvailabilities methods
+
+  goToAppointments() {
+    this.router.navigate(['/therapist-appointments']);
   }
 
   logout() {

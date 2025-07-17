@@ -1,0 +1,73 @@
+<div class="page-wrapper">
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="assets/icons/logo.png" alt="PetalCare Logo" class="logo-icon" />
+      <span class="logo-text">PetalCare</span>
+    </div>
+  </nav>
+
+  <div class="additional-info-wrapper">
+    <div class="additional-info-card">
+      <div class="header-row">
+        <button class="back-btn" (click)="router.navigate(['/questiondesc', 0])" aria-label="Back">
+          <span class="material-icons">arrow_back</span>
+        </button>
+        <h2 class="title">Additional Information</h2>
+      </div>
+      <p class="subtitle">Optional insights and observations to support the assessment</p>
+
+      <form (ngSubmit)="onSubmit()" autocomplete="off">
+        <div class="form-section">
+          <label class="section-label">
+            <span class="material-icons">edit_note</span>
+            Additional Observations
+          </label>
+          <textarea [(ngModel)]="userText" name="userText" placeholder="Describe any other behaviours or concerns here..." rows="3"></textarea>
+        </div>
+
+        <div class="form-section">
+          <label class="section-label">
+            <span class="material-icons">mic</span>
+            Record Audio (Optional)
+          </label>
+          <label class="file-upload-btn" tabindex="0">
+            <input type="file" accept="audio/*" (change)="onAudioChange($event)" hidden>
+            <span class="upload-icon-bg"><span class="material-icons">mic</span></span>
+            <span>Record Voice Note</span>
+            <span *ngIf="audioFile" class="file-chip">{{ audioFile.name }}</span>
+          </label>
+        </div>
+
+        <div class="form-section">
+          <label class="section-label">
+            <span class="material-icons">video_library</span>
+            Upload Video (Optional)
+          </label>
+          <label class="file-upload-btn" tabindex="0">
+            <input type="file" accept="video/*" (change)="onVideoChange($event)" hidden>
+            <span class="upload-icon-bg"><span class="material-icons">video_library</span></span>
+            <span>Upload Video Clip</span>
+            <span *ngIf="videoFile" class="file-chip">{{ videoFile.name }}</span>
+          </label>
+        </div>
+
+        <div class="suggestion-section">
+          <label class="suggestion-label">Suggestion for capturing the video:</label>
+          <p class="suggestion-text">
+            Make the child sit in front of you and call them from behind or point at a distant object to encourage their gaze and response.
+          </p>
+        </div>
+
+        <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+        <div class="action-row">
+          <button class="submit-btn" type="submit" [disabled]="isSubmitting">
+            {{ isSubmitting ? 'Submitting...' : 'Submit' }}
+          </button>
+          <button class="skip-btn" type="button" (click)="router.navigate(['/result'])" [disabled]="isSubmitting">
+            Skip
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

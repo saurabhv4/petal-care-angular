@@ -1,0 +1,55 @@
+<div class="appointments-page-wrapper">
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="assets/icons/logo.png" alt="PetalCare Logo" class="logo-icon" />
+      <span class="logo-text">PetalCare</span>
+    </div>
+    <a routerLink="/therapist-dashboard" class="modern-btn back-btn">← Back to Dashboard</a>
+  </nav>
+
+  <main class="appointments-content">
+    <h2 class="section-title">Manage Your Availability</h2>
+    <form class="appointment-form" (ngSubmit)="addAvailability()" autocomplete="off">
+      <input type="date" [(ngModel)]="availabilityDate" name="availabilityDate" required #dateInput (change)="onDateChange(dateInput.value)" class="form-field" />
+      <select [(ngModel)]="dayOfWeek" name="dayOfWeek" required class="form-field" [disabled]="true">
+        <option value="" disabled selected>Day of Week</option>
+        <option *ngFor="let day of daysOfWeek" [value]="day">{{ day }}</option>
+      </select>
+      <div class="time-field-wrapper">
+        <span class="clock-icon">🕒</span>
+        <input type="time" [(ngModel)]="startTime" name="startTime" required class="form-field time-field" />
+      </div>
+      <div class="time-field-wrapper">
+        <span class="clock-icon">🕒</span>
+        <input type="time" [(ngModel)]="endTime" name="endTime" required class="form-field time-field" />
+      </div>
+      <input type="number" min="1" [(ngModel)]="numberOfSlots" name="numberOfSlots" placeholder="Number of Slots" required class="form-field" />
+      <button type="submit" [disabled]="isAddingAvailability" class="modern-btn">{{ isAddingAvailability ? 'Adding...' : 'Add Availability' }}</button>
+    </form>
+    <div *ngIf="appointmentError" style="color:#e53e3e; font-size:13px; margin-bottom:8px;">{{ appointmentError }}</div>
+    <div *ngIf="appointmentSuccess" style="color:#38a169; font-size:13px; margin-bottom:8px;">{{ appointmentSuccess }}</div>
+    <div *ngIf="availabilities && availabilities.length > 0">
+      <table class="availability-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Day</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Slots</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let a of availabilities">
+            <td>{{ a.availabilityDate }}</td>
+            <td>{{ a.dayOfWeek }}</td>
+            <td>{{ a.startTime }}</td>
+            <td>{{ a.endTime }}</td>
+            <td>{{ a.numberOfSlots }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="availabilities && availabilities.length === 0" style="color:#888; font-size:13px; margin-top:10px;">No availabilities added yet.</div>
+  </main>
+</div>

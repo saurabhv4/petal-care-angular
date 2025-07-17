@@ -82,6 +82,9 @@ export class QuestionDescComponent implements OnInit {
   goToNext() {
     if (this.index < this.questions.length - 1) {
       this.router.navigate(['/questiondesc', this.index + 1]);
+    } else {
+      // After last question, go to additional observation page
+      this.router.navigate(['/additional-observation']);
     }
   }
 
