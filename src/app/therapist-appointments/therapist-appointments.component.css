@@ -176,6 +176,162 @@
   margin-right: 2px;
 }
 
+/* Modal styles */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.18);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+/* Modal improvements */
+.modal {
+  background: #fff;
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 -8px 32px rgba(0,0,0,0.18);
+  padding: 2rem 0 1.5rem 0;
+  min-width: 0;
+  max-width: 380px;
+  width: 100vw;
+  min-height: 0;
+  max-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1100;
+  margin: 0 auto;
+  animation: slideUpSheet 0.32s cubic-bezier(.4,1.4,.6,1), fadeInSheet 0.32s cubic-bezier(.4,1.4,.6,1);
+  overflow-y: auto;
+  background: linear-gradient(135deg, #f0fdf4 0%, #fff 100%);
+}
+@keyframes fadeInSheet {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.modal h3 {
+  color: teal;
+  text-align: center;
+  margin-bottom: 1.2rem;
+  font-size: 1.2rem;
+}
+.modal .close-x {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 1.5rem;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.2s;
+  z-index: 1200;
+}
+.modal .close-x:hover {
+  color: #d84315;
+}
+.edit-btn {
+  background: #e0f2f1;
+  color: teal;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 6px;
+  padding: 7px 14px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin: 0;
+}
+.edit-btn:hover, .edit-btn:focus {
+  background: #b2dfdb;
+  color: #004d40;
+}
+.cancel-btn {
+  background: #fbe9e7;
+  color: #d84315;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 6px;
+  padding: 7px 14px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.cancel-btn:hover, .cancel-btn:focus {
+  background: #ffccbc;
+  color: #bf360c;
+}
+
+/* Modern attractive style for all fields */
+.form-field, input[type="date"], input[type="time"], input[type="number"], select, textarea {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 14px auto;
+  box-sizing: border-box;
+  display: block;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  background: #f7fafc;
+  box-shadow: 0 1px 4px rgba(0,128,128,0.04);
+  height: 44px;
+  font-size: 15px;
+  padding: 0 14px;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.form-field:focus, .form-field:hover,
+input[type="date"]:focus, input[type="date"]:hover,
+input[type="time"]:focus, input[type="time"]:hover,
+input[type="number"]:focus, input[type="number"]:hover,
+select:focus, select:hover,
+textarea:focus, textarea:hover {
+  border-color: teal;
+  background: #e0f2f1;
+  box-shadow: 0 0 0 3px rgba(0,128,128,0.08);
+  outline: none;
+}
+.form-field[disabled], input[disabled], select[disabled] {
+  background: #f3f4f6;
+  color: #bdbdbd;
+  cursor: not-allowed;
+}
+.time-field {
+  padding-left: 38px !important;
+}
+.time-field-wrapper {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 14px auto;
+}
+.modal .form-field, .modal .time-field, .modal input, .modal select {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 14px auto;
+  box-sizing: border-box;
+  display: block;
+}
+.modal .time-field-wrapper {
+  width: 100%;
+  margin-bottom: 14px;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.modal .modern-btn, .modal .cancel-btn {
+  min-width: 120px;
+  margin: 0 0 0 0;
+  font-size: 15px;
+}
+.modal .modal-btn-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 340px;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media (max-width: 600px) {
   .appointments-content {
     max-width: 98vw;
@@ -186,5 +342,25 @@
   }
   .logo-icon {
     height: 36px;
+  }
+  .modal {
+    min-width: 0;
+    max-width: 100vw;
+    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+    border-radius: 16px 16px 0 0;
+  }
+  .modal .form-field, .modal .time-field, .modal input, .modal select {
+    max-width: 98vw;
+    min-width: 0;
+    margin: 0 auto 12px auto;
+  }
+  .modal .modal-btn-row {
+    flex-direction: column;
+    gap: 8px;
+    max-width: 98vw;
+  }
+  .modal .modern-btn, .modal .cancel-btn {
+    width: 100%;
+    min-width: 0;
   }
 }

@@ -21,6 +21,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AdditionalObservationComponent } from './additional-observation/additional-observation.component';
 import { ResultComponent } from './result/result.component';
 import { TherapistAppointmentsComponent } from './therapist-appointments/therapist-appointments.component';
+import { PatientListComponent } from './patient-list/patient-list.component';
+import { DetailedAssessmentComponent } from './detailed-assessment/detailed-assessment.component';
+import { ScoreResultComponent } from './score-result/score-result.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -51,4 +54,7 @@ export const routes: Routes = [
   { path: 'additional-observation', component: AdditionalObservationComponent },
   { path: 'result', component: ResultComponent },
   { path: 'therapist-appointments', component: TherapistAppointmentsComponent },
+  { path: 'therapist/patients', component: PatientListComponent },
+  { path: 'detailed-assessment/:patientId', component: DetailedAssessmentComponent },
+  { path: 'score-result', component: ScoreResultComponent },
 ];

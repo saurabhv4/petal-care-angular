@@ -46,10 +46,41 @@
             <td>{{ a.startTime }}</td>
             <td>{{ a.endTime }}</td>
             <td>{{ a.numberOfSlots }}</td>
+            <td><button class="modern-btn edit-btn" (click)="openEditModal(a)" type="button">Edit</button></td>
           </tr>
         </tbody>
       </table>
     </div>
     <div *ngIf="availabilities && availabilities.length === 0" style="color:#888; font-size:13px; margin-top:10px;">No availabilities added yet.</div>
   </main>
+
+    <!-- Edit Modal -->
+    <div class="modal-backdrop" *ngIf="showEditModal">
+      <div class="modal">
+        <span class="close-x" (click)="closeEditModal()">&times;</span>
+        <h3>Edit Availability</h3>
+        <form (ngSubmit)="updateAvailability()" autocomplete="off">
+          <input type="date" [(ngModel)]="editAvailability.availabilityDate" name="editDate" required #editDateInput (change)="onEditDateChange(editDateInput.value)" class="form-field" />
+          <select [(ngModel)]="editAvailability.dayOfWeek" name="editDayOfWeek" required class="form-field" [disabled]="true">
+            <option value="" disabled selected>Day of Week</option>
+            <option *ngFor="let day of daysOfWeek" [value]="day">{{ day }}</option>
+          </select>
+          <div class="time-field-wrapper">
+            <span class="clock-icon">🕒</span>
+            <input type="time" [(ngModel)]="editAvailability.startTime" name="editStartTime" required class="form-field time-field" />
+          </div>
+          <div class="time-field-wrapper">
+            <span class="clock-icon">🕒</span>
+            <input type="time" [(ngModel)]="editAvailability.endTime" name="editEndTime" required class="form-field time-field" />
+          </div>
+          <input type="number" min="1" [(ngModel)]="editAvailability.numberOfSlots" name="editNumberOfSlots" placeholder="Number of Slots" required class="form-field" />
+          <div class="modal-btn-row">
+            <button type="submit" class="modern-btn" [disabled]="isUpdatingAvailability">{{ isUpdatingAvailability ? 'Updating...' : 'Update' }}</button>
+            <button type="button" class="modern-btn cancel-btn" (click)="closeEditModal()">Cancel</button>
+          </div>
+        </form>
+        <div *ngIf="updateError" style="color:#e53e3e; font-size:13px; margin-top:8px;">{{ updateError }}</div>
+        <div *ngIf="updateSuccess" style="color:#38a169; font-size:13px; margin-top:8px;">{{ updateSuccess }}</div>
+      </div>
+    </div>
 </div>

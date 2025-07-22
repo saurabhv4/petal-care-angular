@@ -1,22 +1,27 @@
-<div class="dashboard-bg">
-  <div class="dashboard-wrapper">
-    <div class="dashboard-navbar">
-      <div class="navbar-logo">
-        <img src="assets/icons/logo.png" alt="PetalCare Logo" />
-        <span class="navbar-title">PetalCare</span>
-      </div>
+<!-- Modernized User Dashboard with Therapist Dashboard Branding -->
+<div class="page-wrapper">
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="assets/icons/logo.png" alt="PetalCare Logo" class="logo-icon" />
+      <span class="logo-text">PetalCare</span>
+    </div>
+    <div class="navbar-user">
+      <span class="user-name">{{ firstName }}</span>
+      <button (click)="logout()" class="logout-btn">Logout</button>
       <div class="navbar-menu" (click)="toggleDrawer()">
         <span class="material-icons">menu</span>
       </div>
     </div>
+  </nav>
 
-    <div class="dashboard-main">
-      <div class="dashboard-greeting-card">
-        <div class="greeting-date">{{ currentDate }}</div>
-        <div class="greeting-text">Hello, <b>{{ firstName }}</b></div>
-      </div>
+  <main class="dashboard-content">
+    <div class="welcome-section">
+      <h2>Hello, <b>{{ firstName }}</b></h2>
+      <div class="greeting-date">{{ currentDate }}</div>
+    </div>
 
-      <div class="assessment-card">
+    <div class="dashboard-cards">
+      <div class="card assessment-card">
         <div class="assessment-content">
           <div class="assessment-title">Complete the Early Assessment</div>
           <div class="assessment-progress">
@@ -28,8 +33,7 @@
           </div>
         </div>
       </div>
-
-      <div class="features-section">
+      <div class="card features-section">
         <div class="features-title">Categories</div>
         <div class="features-grid">
           <div class="feature-card">
@@ -50,24 +54,23 @@
           </div>
         </div>
       </div>
-
-      <div class="appointments-section">
+      <div class="card appointments-section">
         <div class="appointments-title">No upcoming appointments</div>
       </div>
     </div>
+  </main>
 
-    <!-- Slide Drawer -->
-    <div class="slide-drawer" [class.open]="drawerOpen" (click)="closeDrawer()">
-      <div class="drawer-content" (click)="$event.stopPropagation()">
-        <div class="drawer-avatar">
-          <span class="material-icons">account_circle</span>
-        </div>
-        <div class="drawer-name">{{ firstName }}</div>
-        <div class="drawer-menu">
-          <div class="drawer-menu-item" (click)="navigateToProfile()"><span class="material-icons">person</span> Profile</div>
-          <div class="drawer-menu-item"><span class="material-icons">history</span> Assessment History</div>
-          <div class="drawer-menu-item" (click)="logout()"><span class="material-icons">logout</span> Logout</div>
-        </div>
+  <!-- Slide Drawer -->
+  <div class="slide-drawer" [class.open]="drawerOpen" (click)="closeDrawer()">
+    <div class="drawer-content" (click)="$event.stopPropagation()">
+      <div class="drawer-avatar">
+        <span class="material-icons">account_circle</span>
+      </div>
+      <div class="drawer-name">{{ firstName }}</div>
+      <div class="drawer-menu">
+        <div class="drawer-menu-item" (click)="navigateToProfile()"><span class="material-icons">person</span> Profile</div>
+        <div class="drawer-menu-item"><span class="material-icons">history</span> Assessment History</div>
+        <div class="drawer-menu-item" (click)="logout()"><span class="material-icons">logout</span> Logout</div>
       </div>
     </div>
   </div>

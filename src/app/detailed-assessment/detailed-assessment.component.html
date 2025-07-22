@@ -1,0 +1,45 @@
+<nav class="navbar">
+  <div class="logo-container">
+    <img src="assets/icons/logo.png" alt="PetalCare Logo" class="logo-icon" />
+    <span class="logo-text">PetalCare</span>
+  </div>
+  <a (click)="goBack()" class="modern-btn back-btn">
+    <span class="back-arrow">&#8592;</span> Back to Dashboard
+  </a>
+</nav>
+<div class="assessment-bg">
+  <div class="assessment-page-wrapper">
+    <div class="header">
+      <h1 class="title">Detailed Assessment</h1>
+    </div>
+
+    <div *ngIf="isLoading" class="loading-indicator">
+      <p>Loading assessment...</p>
+    </div>
+
+    <ng-container *ngIf="!isLoading">
+      <div *ngIf="error; else assessmentContent" class="error-message error-below">
+        <p>{{ error }}</p>
+      </div>
+      <ng-template #assessmentContent>
+        <div class="assessment-container">
+          <div *ngFor="let area of assessmentAreas" class="accordion-item" [class.open]="area.isOpen">
+            <div class="accordion-header" (click)="toggleAccordion(area)">
+              <span>{{ area.name }}</span>
+              <span class="accordion-icon">{{ area.isOpen ? '▼' : '▶' }}</span>
+            </div>
+            <div class="accordion-content" [class.open]="area.isOpen">
+              <div *ngFor="let subSkill of area.subSkills" class="sub-skill-item">
+                <label class="sub-skill-name">{{ subSkill.name }}</label>
+                <input type="number" min="0" max="5" [(ngModel)]="subSkill.score" class="score-input" placeholder="0-5" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <button (click)="calculateScores()" class="modern-btn calculate-button">Calculate Score</button>
+        </div>
+      </ng-template>
+    </ng-container>
+  </div>
+</div>

@@ -69,6 +69,10 @@ export class TherapistDashboardComponent implements OnInit {
     this.router.navigate(['/therapist-appointments']);
   }
 
+  goToPatientList() {
+    this.router.navigate(['/therapist/patients']);
+  }
+
   logout() {
     // Clear all authentication data
     localStorage.removeItem('authToken');

@@ -1,69 +1,135 @@
-body, .dashboard-bg {
+/* Modernized User Dashboard CSS - Therapist Dashboard Branding */
+
+.page-wrapper {
   min-height: 100vh;
   background: linear-gradient(to bottom right, #dbeafe, #f0fdf4);
 }
 
-.dashboard-wrapper {
-  min-height: 100vh;
-  background: transparent;
-  padding: 0 0 32px 0;
-  font-family: 'Inter', Arial, sans-serif;
-  max-width: 600px;
-  margin: 0 auto;
+.navbar {
+  width: 100%;
+  padding: 16px 32px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-icon {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+.logo-text {
+  font-size: 24px;
+  font-weight: 600;
+  color: teal;
+}
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.user-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1f2937;
+}
+.logout-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 8px;
+}
+.logout-btn:hover {
+  background: #dc2626;
+}
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 8px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 0.18s;
+}
+.navbar-menu:hover {
+  background: #f0fdf4;
+}
+.navbar-menu .material-icons {
+  font-size: 28px;
+  color: #008080;
 }
 
-.dashboard-header {
+.dashboard-content {
+  padding: 2.5rem 1rem 2rem 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 24px 20px 0 20px;
 }
-.dashboard-date {
+.welcome-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.welcome-section h2 {
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+}
+.greeting-date {
   color: #b0b0b0;
   font-size: 16px;
   font-weight: 500;
 }
-.dashboard-avatar {
-  background: #008080;
-  color: #fff;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+.dashboard-cards {
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: center;
-  font-size: 32px;
-  cursor: pointer;
-  transition: background 0.18s;
+  align-items: stretch;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
 }
-.dashboard-avatar:hover {
-  background: #006666;
+.card {
+  flex: 1 1 0;
+  min-width: 260px;
+  max-width: 370px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: white;
+  padding: 1.5rem 1.2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: box-shadow 0.2s, transform 0.2s;
+  margin: 0;
+  height: auto;
+  justify-content: flex-start;
 }
-.dashboard-avatar .material-icons {
-  font-size: 32px;
-  color: #fff;
-}
-.dashboard-greeting {
-  font-size: 28px;
-  font-weight: 700;
-  margin: 12px 0 0 20px;
-  color: #222;
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 128, 128, 0.13), 0 2px 4px rgba(0,0,0,0.07);
+  border-color: #00808033;
 }
 .assessment-card {
   background: #008080;
   color: #fff;
   border-radius: 18px;
-  margin: 0 0 28px 0;
-  padding: 22px 24px 18px 24px;
-  display: flex;
-  align-items: center;
   box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-}
-.assessment-content {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin-bottom: 0;
+  padding: 22px 24px 18px 24px;
 }
 .assessment-title {
   font-size: 18px;
@@ -95,57 +161,10 @@ body, .dashboard-bg {
   justify-content: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
-.categories-section {
-  margin: 32px 0 0 0;
-}
-.categories-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: #222;
-  margin-left: 20px;
-  margin-bottom: 10px;
-}
-.categories-list {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 20px;
-  gap: 8px;
-}
-.category-item {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-  padding: 14px 8px 8px 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 70px;
-  font-size: 14px;
-  color: #222;
-  transition: box-shadow 0.2s;
-  min-width: 70px;
-}
-.category-icon {
-  font-size: 28px;
-  color: #008080;
-  margin-bottom: 6px;
-  display: block;
-}
-.category-label {
-  font-size: 13px;
-  color: #222;
-  text-align: center;
-  margin-top: 2px;
-  white-space: nowrap;
-}
-.category-item:hover {
-  box-shadow: 0 4px 16px rgba(0,128,128,0.10);
-}
 .features-section {
   background: #fff;
   border-radius: 18px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  margin-bottom: 24px;
   padding: 24px 24px 18px 24px;
 }
 .features-title {
@@ -156,7 +175,7 @@ body, .dashboard-bg {
 }
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 }
 .feature-card {
@@ -196,7 +215,6 @@ body, .dashboard-bg {
   background: #fff;
   border-radius: 18px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  margin-bottom: 24px;
   padding: 24px 24px 18px 24px;
 }
 .appointments-title {
@@ -252,148 +270,70 @@ body, .dashboard-bg {
   align-items: center;
   justify-content: center;
   font-size: 48px;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
 }
 .drawer-name {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
-  margin-bottom: 30px;
-  color: #fff;
+  margin-bottom: 18px;
 }
 .drawer-menu {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 10px;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 0 24px;
 }
 .drawer-menu-item {
   display: flex;
   align-items: center;
-  gap: 16px;
-  font-size: 18px;
-  padding: 14px 32px;
-  cursor: pointer;
+  gap: 10px;
+  font-size: 16px;
   color: #fff;
+  padding: 10px 0;
+  cursor: pointer;
   border-radius: 8px;
   transition: background 0.18s;
+  width: 100%;
 }
 .drawer-menu-item:hover {
-  background: rgba(255,255,255,0.12);
-}
-
-.drawer-menu-item:active {
-  background: rgba(255,255,255,0.20);
-  transform: scale(0.98);
-}
-.drawer-menu-item .material-icons {
-  font-size: 24px;
-}
-.dashboard-navbar {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  padding: 0 24px;
-  height: 64px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  border-radius: 0 0 18px 18px;
-}
-.navbar-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.navbar-logo img {
-  height: 38px;
-  width: auto;
-}
-.navbar-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: #008080;
-  letter-spacing: 1px;
-}
-.navbar-menu {
-  cursor: pointer;
-  background: #008080;
-  color: #fff;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.18s;
-}
-.navbar-menu:hover {
   background: #006666;
 }
-.navbar-menu .material-icons {
-  font-size: 28px;
-}
-.dashboard-main {
-  max-width: 520px;
-  margin: 0 auto;
-  padding: 24px 0 0 0;
-}
-.dashboard-greeting-card {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.greeting-date {
-  color: #b0b0b0;
-  font-size: 15px;
-  font-weight: 500;
-}
-.greeting-text {
+.drawer-menu-item .material-icons {
   font-size: 22px;
-  font-weight: 600;
-  color: #222;
-}
-.assessment-progress svg circle[stroke="#008080"] {
-  stroke: #008080;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-  .dashboard-wrapper {
-    padding: 0;
-    max-width: 100vw;
+@media (max-width: 1100px) {
+  .dashboard-cards {
+    flex-wrap: wrap;
+    gap: 1.2rem;
   }
-  .dashboard-navbar {
-    padding: 0 10px;
-    height: 54px;
+  .card {
+    max-width: 100%;
+    height: auto;
   }
-  .dashboard-main {
-    padding: 12px 0 0 0;
+}
+@media (max-width: 700px) {
+  .dashboard-cards {
+    flex-direction: column;
+    gap: 1.2rem;
   }
-  .dashboard-greeting-card, .assessment-card, .features-section, .appointments-section {
-    padding: 12px 10px 8px 10px;
+  .dashboard-content {
+    padding: 1.2rem 0.5rem 1.5rem 0.5rem;
   }
-  .features-grid {
-    gap: 6px;
+  .logo-text {
+    font-size: 18px;
   }
-  .feature-card {
-    padding: 12px 2px 6px 2px;
-    font-size: 12px;
-    min-width: 56px;
+  .logo-icon {
+    height: 36px;
   }
-  .feature-icon {
-    font-size: 24px;
-    margin-bottom: 4px;
+  .card {
+    height: auto;
   }
-  .categories-list {
-    gap: 2px;
-  }
-  .category-item {
-    width: 60px;
-    font-size: 12px;
-    padding: 14px 4px 8px 4px;
+  .drawer-content {
+    width: 90vw;
+    max-width: 98vw;
+    border-radius: 0 24px 24px 0;
   }
 }
