@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { FormsModule } from '@angular/forms';
+import { ResultService } from '../services/result.service'; // adjust path as needed
 
 interface SubSkill {
   id: number;
@@ -35,7 +36,8 @@ export class DetailedAssessmentComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private resultService: ResultService,
   ) {}
 
   ngOnInit(): void {
@@ -92,7 +94,8 @@ export class DetailedAssessmentComponent implements OnInit {
     this.http.post(`${environment.api.baseUrl}/api/v1/assessment-areas/calculate-scores?patientId=${this.patientId}`, body, { headers }).subscribe({
       next: (response) => {
         console.log('Scores calculated successfully', response);
-        this.router.navigate(['/score-result'], { state: { result: response } });
+        this.resultService.setResult(response); // <-- SET THE RESULT IN THE SERVICE
+        this.router.navigate(['/score-result']);
       },
       error: (err) => {
         this.error = err?.error?.message || 'Failed to calculate scores.';

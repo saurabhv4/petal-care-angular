@@ -24,6 +24,8 @@ import { TherapistAppointmentsComponent } from './therapist-appointments/therapi
 import { PatientListComponent } from './patient-list/patient-list.component';
 import { DetailedAssessmentComponent } from './detailed-assessment/detailed-assessment.component';
 import { ScoreResultComponent } from './score-result/score-result.component';
+import { CreatePlanComponent } from './create-plan.component';
+import { GoalDetailsComponent } from './goal-details.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -57,4 +59,6 @@ export const routes: Routes = [
   { path: 'therapist/patients', component: PatientListComponent },
   { path: 'detailed-assessment/:patientId', component: DetailedAssessmentComponent },
   { path: 'score-result', component: ScoreResultComponent },
+  { path: 'create-plan', component: CreatePlanComponent },
+  { path: 'goal-details', component: GoalDetailsComponent },
 ];

@@ -1,0 +1,35 @@
+<nav class="navbar">
+  <button class="modern-btn back-btn" (click)="goBack()">
+    <span class="back-arrow">&#8592;</span> Back
+  </button>
+  <div class="logo-container">
+    <img src="assets/icons/logo.png" alt="PetalCare Logo" class="logo-icon" />
+    <span class="logo-text">PetalCare</span>
+  </div>
+</nav>
+<div class="goal-details-container">
+  <h2 class="goal-title">{{ area.name }}</h2>
+  <form>
+    <label class="input-label">Goal Name</label>
+    <input class="input-field" type="text" [(ngModel)]="goalName" name="goalName" placeholder="Enter goal name" />
+
+    <label class="input-label">Goal Description</label>
+    <textarea class="input-field textarea" [(ngModel)]="goalDescription" name="goalDescription" placeholder="Enter goal description"></textarea>
+
+    <div class="freq-label">Frequency</div>
+    <div class="freq-toggle-group">
+      <button type="button" class="freq-btn" [class.selected]="frequency === 'Daily'" (click)="setFrequency('Daily')">Daily</button>
+      <button type="button" class="freq-btn" [class.selected]="frequency === 'Weekly'" (click)="setFrequency('Weekly')">Weekly</button>
+      <button type="button" class="freq-btn" [class.selected]="frequency === 'Custom'" (click)="setFrequency('Custom')">Custom</button>
+    </div>
+  </form>
+  <div class="action-btns">
+    <button class="cancel-btn" type="button" (click)="cancel()">Cancel</button>
+    <button class="add-btn" type="button" (click)="add()">Add</button>
+    <button class="save-btn" type="button" (click)="save()">Save</button>
+  </div>
+  <div *ngIf="message" class="message-container">
+    <span>{{ message }}</span>
+    <button class="close-btn" (click)="dismissMessage()">&times;</button>
+  </div>
+</div>

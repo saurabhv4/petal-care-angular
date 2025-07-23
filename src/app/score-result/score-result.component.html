@@ -1,58 +1,57 @@
-<div class="score-result-bg">
-  <nav class="navbar">
-    <div class="logo-container">
-      <img src="assets/icons/logo.png" alt="PetalCare Logo" class="logo-icon" />
-      <span class="logo-text">PetalCare</span>
-    </div>
-    <a routerLink="/therapist-dashboard" class="modern-btn back-btn">
-      <span class="back-arrow">&#8592;</span> Back to Dashboard
-    </a>
-  </nav>
-  <div class="score-result-main">
-    <h2 class="score-title">Results</h2>
-    <div class="score-chart-section">
-      <svg viewBox="0 0 120 120" class="risk-chart">
-        <g>
-          <ng-container *ngFor="let seg of chartSegments; let i = index">
-            <circle
-              [attr.stroke]="seg.color"
-              stroke-width="7"
-              fill="none"
-              [attr.stroke-dasharray]="(seg.percent * 3.77) / 100 * 377 + ' ' + (377 - (seg.percent * 3.77) / 100 * 377)"
-              [attr.stroke-dashoffset]="getChartOffset(i)"
-              cx="60" cy="60" r="60"
-              style="transition: stroke 0.3s;"
-            />
-          </ng-container>
-        </g>
-        <g>
-          <ng-container *ngFor="let pos of areaLabelPositions">
-            <text [attr.x]="pos.x" [attr.y]="pos.y" text-anchor="middle" class="area-label">{{ pos.name }}</text>
-          </ng-container>
-        </g>
-        <text x="60" y="65" text-anchor="middle" class="risk-label" [attr.fill]="getRiskColor(overallRisk)">{{ overallRiskLabel }}</text>
-      </svg>
-    </div>
-    <div class="risk-summary-label">Let's understand each parameter better</div>
-    <div class="risk-groups">
-      <ng-container *ngFor="let group of groupedAreas">
-        <div *ngIf="group.areas.length" class="risk-group-card" [class.expanded]="group.expanded">
-          <div class="risk-group-header" (click)="toggleExpand(group)">
-            <span class="risk-badge" [ngStyle]="{'background': group.color}">{{ group.areas.length ? (group.areas[0].percentageScore | number:'1.0-0') : 0 }}%</span>
-            <span class="risk-group-title">{{ group.label }}</span>
-            <span class="risk-group-desc">Assessment areas with {{ group.label.toLowerCase() }}</span>
-            <span class="expand-icon">{{ group.expanded ? '▲' : '▼' }}</span>
-          </div>
-          <div class="risk-group-details" *ngIf="group.expanded">
-            <div *ngFor="let area of group.areas" class="risk-area-detail">
-              <div class="area-name">{{ area.areaName }}</div>
-              <div class="area-detail">Total Sub-Skills: {{ area.totalSubSkills }}, Total Score: {{ area.totalScore }}, Percentage: {{ area.percentageScore | number:'1.2-2' }}%</div>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-    </div>
-    <button class="create-plan-btn" (click)="createPlan()">Create Plan</button>
-    <button class="back-btn" (click)="goBack()">Back to Patient List</button>
+<nav class="navbar">
+  <div class="logo-container">
+    <img src="assets/icons/logo.png" alt="PetalCare Logo" class="logo-icon" />
+    <span class="logo-text">PetalCare</span>
   </div>
+  <button class="modern-btn back-btn" (click)="goBack()">
+    <span class="back-arrow">&#8592;</span> Back
+  </button>
+</nav>
+
+<div class="results-container">
+  <h2 class="overall-title">Overall Risk Level</h2>
+  <div class="risk-label-main" [ngClass]="overallRisk.toLowerCase()">{{ overallRisk }}</div>
+
+  <!-- Dynamic Circular Risk Chart -->
+  <div class="chart-container">
+    <svg width="220" height="220" viewBox="0 0 220 220">
+      <ng-container *ngFor="let group of riskGroups; let i = index">
+        <circle
+          r="90" cx="110" cy="110" fill="transparent"
+          [attr.stroke]="group.color"
+          stroke-width="30"
+          [attr.stroke-dasharray]="group.groupPercentage * 2.4 + ' ' + (240 - group.groupPercentage * 2.4)"
+          [attr.stroke-dashoffset]="getChartOffset(i)"
+          stroke-linecap="round"
+        />
+      </ng-container>
+      <text x="110" y="120" text-anchor="middle" class="risk-label-main-svg" [ngClass]="overallRisk.toLowerCase()">{{ overallRiskLabel }}</text>
+    </svg>
+    <div class="chart-label">Risk<br>Breakdown</div>
+  </div>
+
+  <h3 class="section-title">Assessment Area Breakdown</h3>
+  <div class="dropdowns">
+    <div *ngFor="let group of riskGroups; let i = index" class="risk-group-card" [class.expanded]="group.expanded">
+      <div class="risk-group-header" (click)="toggleDropdown(i)">
+        <span class="risk-badge group-badge" [ngStyle]="{'background': group.color}">{{ group.groupPercentage }}%</span>
+        <span class="risk-group-title">{{ group.label }}</span>
+        <span class="risk-group-desc">Assessment areas with {{ group.label.toLowerCase() }}</span>
+        <span class="expand-icon">{{ group.expanded ? '▲' : '▼' }}</span>
+      </div>
+      <div class="risk-group-details" *ngIf="group.expanded">
+        <ng-container *ngIf="group.areas.length; else noAreas">
+          <div *ngFor="let area of group.areas" class="risk-area-detail">
+            <div class="area-name">{{ area.name }}</div>
+            <div class="area-detail">Total Sub-Skills: {{ area.totalSubSkills }}, Total Score: {{ area.totalScore }}, Percentage: {{ area.percentageScore | number:'1.2-2' }}%</div>
+          </div>
+        </ng-container>
+        <ng-template #noAreas>
+          <div class="no-areas-msg">No areas in this risk group.</div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <button class="create-plan-btn" (click)="goToCreatePlan()">Create Plan</button>
 </div>

@@ -1,0 +1,182 @@
+.navbar {
+  width: 100vw;
+  min-width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem 1.5rem 1rem 1.5rem;
+  background: #fff;
+  border-radius: 0 0 18px 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  margin-bottom: 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+  margin-left: 1.2rem;
+}
+.logo-icon {
+  width: 32px;
+  height: auto;
+  margin-right: 8px;
+}
+.logo-text {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: -0.5px;
+}
+.modern-btn.back-btn {
+  background: #0d9488;
+  color: #fff;
+  border-radius: 999px;
+  padding: 8px 18px 8px 14px;
+  font-size: 0.98rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 1px 4px rgba(13,148,136,0.08);
+  border: none;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+  text-decoration: none;
+  margin-right: 1.2rem;
+}
+.modern-btn.back-btn:hover {
+  background: #0f766e;
+  box-shadow: 0 2px 8px rgba(13,148,136,0.13);
+  transform: translateY(-2px) scale(1.04);
+}
+.back-arrow {
+  font-size: 1.1rem;
+  margin-right: 3px;
+}
+.create-plan-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 12px 100px 12px;
+  font-family: 'Segoe UI', 'Inter', 'Roboto', Arial, sans-serif;
+  background: linear-gradient(135deg, #fafdff 0%, #e0f7fa 100%);
+  min-height: 100vh;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+}
+.page-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  color: #0d9488;
+  letter-spacing: 0.5px;
+}
+.area-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-bottom: 60px;
+}
+.area-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 22px 18px 16px 18px;
+  cursor: pointer;
+  transition: box-shadow 0.18s, transform 0.18s, border-color 0.18s;
+  border: 1.5px solid #e0e7ef !important;
+  background: #fff !important;
+  position: relative;
+}
+.area-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.13);
+  transform: translateY(-2px) scale(1.01);
+  border-color: #0d9488;
+  background: #fafdff;
+}
+.area-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+.area-name {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #0d9488;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.2px;
+}
+.area-risk {
+  font-size: 0.98rem;
+  color: #444;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.area-badge {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  color: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+  font-weight: 600;
+  margin-left: 7px;
+}
+.area-detail {
+  font-size: 0.93rem;
+  color: #666;
+  margin-top: 0.1rem;
+  font-style: italic;
+  font-weight: 400;
+}
+.create-goals-btn {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  margin: 0 auto;
+  width: 96%;
+  max-width: 420px;
+  padding: 0.95rem 0;
+  background: linear-gradient(90deg, #0d9488 0%, #14b8a6 100%);
+  color: #fff;
+  border: none;
+  border-radius: 22px;
+  font-size: 1.08rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(13,148,136,0.10);
+  transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+  z-index: 20;
+}
+.create-goals-btn:hover {
+  background: linear-gradient(90deg, #0f766e 0%, #14b8a6 100%);
+  box-shadow: 0 4px 18px rgba(13,148,136,0.18);
+  transform: scale(1.02);
+}
+@media (max-width: 900px) {
+  .create-plan-container {
+    max-width: 100vw;
+    padding: 10px 2vw 100px 2vw;
+    border-radius: 0;
+  }
+  .area-card {
+    padding: 12px 3vw 10px 3vw;
+  }
+  .create-goals-btn {
+    font-size: 0.98rem;
+    padding: 0.8rem 0;
+    max-width: 98vw;
+  }
+}

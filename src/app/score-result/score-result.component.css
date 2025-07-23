@@ -1,44 +1,34 @@
-.score-result-bg {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #e0f7fa 0%, #f8fafc 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-}
-
 .navbar {
-  width: 100%;
+  width: 100vw;
+  min-width: 100vw;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 1.2rem 2.2rem 1.2rem 2.2rem;
   background: #fff;
   border-radius: 0 0 18px 18px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.06);
   margin-bottom: 2.2rem;
-  position: relative;
-  z-index: 2;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
-
 .logo-container {
   display: flex;
   align-items: center;
+  margin-right: 1.5rem;
 }
-
 .logo-icon {
   width: 40px;
   height: auto;
   margin-right: 10px;
 }
-
 .logo-text {
   font-size: 1.5rem;
   font-weight: bold;
   color: #333;
   letter-spacing: -1px;
 }
-
 .modern-btn.back-btn {
   background: #0d9488;
   color: #fff;
@@ -53,163 +43,144 @@
   border: none;
   transition: background 0.2s, box-shadow 0.2s;
   text-decoration: none;
+  margin-left: auto;
 }
-
 .modern-btn.back-btn:hover {
   background: #0f766e;
   box-shadow: 0 4px 16px rgba(13,148,136,0.13);
 }
-
 .back-arrow {
   font-size: 1.2rem;
   margin-right: 4px;
 }
-
-.score-result-main {
-  width: 100%;
-  max-width: 480px;
+.results-container {
+  max-width: 700px;
   margin: 0 auto;
-  background: transparent;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.score-title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #222;
-  margin-bottom: 1.2rem;
+  padding: 40px 20px 60px 20px;
+  font-family: 'Segoe UI', sans-serif;
   text-align: center;
-  letter-spacing: -1px;
+  background: linear-gradient(135deg, #e0f7fa 0%, #f8fafc 100%);
+  min-height: 100vh;
+  margin-top: 2.5rem;
 }
 
-.score-chart-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 2.2rem;
-  position: relative;
+h2 span.low { color: #146c2c; }
+h2 span.medium { color: #967D00; }
+h2 span.high { color: #9A1515; }
+
+.overall-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #222;
 }
 
-.risk-chart {
-  width: 220px;
-  height: 120px;
-  margin: 0 auto;
-  display: block;
+.risk-label-main {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 2.5rem;
+  border-radius: 16px;
+  display: inline-block;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
 }
+.risk-label-main.low { background: #e6fcfa; color: #14b8a6; }
+.risk-label-main.medium { background: #fffbe6; color: #eab308; }
+.risk-label-main.high { background: #fff1f1; color: #ef4444; }
 
-.risk-label {
-  font-size: 1.5rem;
+.risk-label-main-svg {
+  font-size: 2.1rem;
   font-weight: bold;
   dominant-baseline: middle;
-  fill: #eab308;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px #fff;
+  font-family: 'Segoe UI', sans-serif;
+}
+.risk-label-main-svg.low { fill: #14b8a6; }
+.risk-label-main-svg.medium { fill: #eab308; }
+.risk-label-main-svg.high { fill: #ef4444; }
+
+.chart-container {
+  position: relative;
+  margin: 30px auto 20px auto;
+  width: 220px;
+  height: 220px;
+  background: none;
+}
+
+.chart-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+  pointer-events: none;
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 2.2rem 0 1.2rem 0;
+  color: #0d9488;
   letter-spacing: 1px;
 }
 
-.area-label {
-  font-size: 0.95rem;
-  font-weight: 500;
-  fill: #222;
-  text-shadow: 0 1px 4px #fff;
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+  margin-bottom: 2.5rem;
 }
 
-.risk-summary-label {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #222;
-  margin-bottom: 1.2rem;
-  margin-top: 0.5rem;
-  text-align: center;
-}
-
-.risk-groups {
-  width: 100%;
-  margin-bottom: 2.2rem;
-}
-
-.risk-group-card {
+.card {
   background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-  margin-bottom: 1.2rem;
-  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  padding: 22px 18px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   transition: box-shadow 0.2s;
+  border: 2px solid #f0f0f0;
 }
-
-.risk-group-card.expanded {
-  box-shadow: 0 4px 20px rgba(0,0,0,0.11);
-}
-
-.risk-group-header {
+.card-header {
+  width: 100%;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 1.1rem 1.3rem;
-  cursor: pointer;
-  background: #f8fafc;
-  border-bottom: 1px solid #f0f0f0;
+  justify-content: space-between;
+  margin-bottom: 0.7rem;
 }
-
-.risk-badge {
-  min-width: 48px;
-  min-height: 32px;
-  border-radius: 8px;
-  color: #fff;
-  font-weight: bold;
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 8px;
-}
-
-.risk-group-title {
+.area-name {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #222;
-}
-
-.risk-group-desc {
-  font-size: 0.98rem;
-  color: #888;
-  margin-left: auto;
-}
-
-.expand-icon {
-  font-size: 1.1rem;
-  margin-left: 10px;
-  color: #888;
-}
-
-.risk-group-details {
-  padding: 1.1rem 1.3rem 1.1rem 1.3rem;
-  background: #fff;
-}
-
-.risk-area-detail {
-  margin-bottom: 1.1rem;
-}
-
-.risk-area-detail:last-child {
-  margin-bottom: 0;
-}
-
-.area-name {
-  font-size: 1.05rem;
-  font-weight: 500;
   color: #0d9488;
-  margin-bottom: 0.2rem;
 }
-
-.area-detail {
-  font-size: 0.97rem;
+.risk-badge {
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 0.3rem 1.1rem;
+  color: #fff;
+  margin-left: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  text-transform: uppercase;
+}
+.risk-badge.low { background: #14b8a6; }
+.risk-badge.medium { background: #eab308; }
+.risk-badge.high { background: #ef4444; }
+.risk-desc {
+  font-size: 1.05rem;
   color: #444;
+  margin-top: 0.2rem;
 }
-
 .create-plan-btn {
-  width: 100%;
-  margin: 2.2rem 0 0.7rem 0;
+  margin: 0 auto;
+  display: block;
+  width: 80%;
+  max-width: 320px;
   padding: 1.1rem 0;
   background: #0d9488;
   color: #fff;
@@ -220,26 +191,98 @@
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(13,148,136,0.08);
   transition: background 0.2s, box-shadow 0.2s;
+  margin-top: 2.2rem;
 }
-
 .create-plan-btn:hover {
   background: #0f766e;
   box-shadow: 0 4px 16px rgba(13,148,136,0.13);
 }
-
-.back-btn {
-  margin-top: 0.5rem;
-  padding: 0.8rem 2rem;
-  background: #007b83;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s;
+@media (max-width: 600px) {
+  .results-container {
+    padding: 10px 2px 40px 2px;
+  }
+  .chart-container {
+    width: 160px;
+    height: 160px;
+  }
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .create-plan-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 1rem 0;
+  }
 }
 
-.back-btn:hover {
-  background: #005f5f;
+.dropdowns {
+  width: 100%;
+  margin: 2.5rem 0 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.risk-group-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+  margin-bottom: 0;
+  overflow: hidden;
+  transition: box-shadow 0.2s, border 0.2s;
+  border: 2px solid #e0e7ef;
+  min-height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.risk-group-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 1.1rem 1.3rem;
+  cursor: pointer;
+  background: #f8fafc;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.2s;
+  position: relative;
+  min-height: 60px;
+}
+.risk-group-card.expanded .risk-group-header {
+  background: #f1f5f9;
+}
+.no-areas-msg {
+  text-align: center;
+  color: #aaa;
+  font-size: 1.08rem;
+  padding: 1.5rem 0 1.5rem 0;
+  font-style: italic;
+}
+.risk-group-details {
+  padding: 1.1rem 1.3rem 1.1rem 1.3rem;
+  background: #fff;
+  animation: fadeIn 0.3s;
+  min-height: 40px;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.risk-area-detail {
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+.risk-area-detail:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+.area-name {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #0d9488;
+  margin-bottom: 0.2rem;
+}
+.area-detail {
+  font-size: 0.97rem;
+  color: #444;
 }

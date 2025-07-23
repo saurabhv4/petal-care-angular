@@ -1,0 +1,34 @@
+<nav class="navbar">
+  <button class="modern-btn back-btn" (click)="goBack()">
+    <span class="back-arrow">&#8592;</span> Back
+  </button>
+  <div class="logo-container">
+    <img src="assets/icons/logo.png" alt="PetalCare Logo" class="logo-icon" />
+    <span class="logo-text">PetalCare</span>
+  </div>
+</nav>
+<div class="create-plan-container">
+  <h2 class="page-title">Create Intervention</h2>
+  <div class="area-list">
+    <ng-container *ngFor="let group of groupedAreas">
+      <ng-container *ngFor="let area of group.areas">
+        <div class="area-card" (click)="goToGoalDetails(area)">
+          <div class="area-info">
+            <div class="area-name">{{ area.name }}</div>
+            <div class="area-risk">Risk Level: {{ area.risk }}
+              <span class="area-badge" [ngStyle]="{'background': group.color}">
+                <ng-container [ngSwitch]="group.label">
+                  <span *ngSwitchCase="'High'">&#9888;</span>
+                  <span *ngSwitchCase="'Medium'">&#x26A0;</span>
+                  <span *ngSwitchCase="'Low'">&#33;</span>
+                </ng-container>
+              </span>
+            </div>
+            <div class="area-detail">Total Sub-Skills: {{ area.totalSubSkills }}, Total Score: {{ area.totalScore }}, Percentage: {{ area.percentageScore | number:'1.2-2' }}%</div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+  <button class="create-goals-btn" (click)="createGoals()">Create Goals</button>
+</div>

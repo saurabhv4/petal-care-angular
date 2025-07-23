@@ -1,109 +1,109 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
-
-interface AreaResult {
-  areaId: number;
-  areaName: string;
-  totalSubSkills: number;
-  totalScore: number;
-  percentageScore: number;
-  risk: 'high' | 'medium' | 'low';
-}
+import { CommonModule, NgClass } from '@angular/common';
+import { Router } from '@angular/router';
+import { ResultService } from '../services/result.service';
 
 @Component({
   selector: 'app-score-result',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, NgClass],
   templateUrl: './score-result.component.html',
-  styleUrl: './score-result.component.css'
+  styleUrls: ['./score-result.component.css']
 })
 export class ScoreResultComponent implements OnInit {
-  result: any = null;
-  overallRisk: 'high' | 'medium' | 'low' = 'low';
-  overallRiskLabel = 'LOW';
-  chartSegments: { color: string; label: string; percent: number; areaName: string; }[] = [];
-  groupedAreas: { risk: 'high' | 'medium' | 'low'; label: string; color: string; areas: AreaResult[]; expanded: boolean; }[] = [];
-  areaLabelPositions: { x: number; y: number; name: string }[] = [];
+  overallRisk: 'Low' | 'Medium' | 'High' = 'Low';
+  overallRiskLabel = '';
+  assessmentAreas: { name: string; totalSubSkills: number; totalScore: number; percentageScore: number; risk: 'Low' | 'Medium' | 'High' }[] = [];
+  riskGroups: { label: string; level: 'High' | 'Medium' | 'Low'; color: string; areas: { name: string; totalSubSkills: number; totalScore: number; percentageScore: number; risk: 'Low' | 'Medium' | 'High' }[]; groupPercentage: number; expanded: boolean }[] = [];
+  totalSum = 0;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private resultService: ResultService) {}
 
   ngOnInit(): void {
-    const nav = this.router.getCurrentNavigation();
-    this.result = nav?.extras?.state?.['result'] || null;
-    this.processResult();
+    // Get result from ResultService
+    const result = this.resultService.getResult();
+    console.log('Result in ScoreResultComponent:', result);
+    if (result && result.assessmentAreas) {
+      this.totalSum = result.totalSum || 0;
+      if (this.totalSum >= 67) this.overallRisk = 'High';
+      else if (this.totalSum >= 34) this.overallRisk = 'Medium';
+      else this.overallRisk = 'Low';
+      this.overallRiskLabel = this.overallRisk.toUpperCase();
+      this.assessmentAreas = result.assessmentAreas.map((area: any) => {
+        let risk: 'Low' | 'Medium' | 'High' = 'Low';
+        if (area.percentageScore >= 67) risk = 'High';
+        else if (area.percentageScore >= 34) risk = 'Medium';
+        return {
+          name: area.areaName,
+          totalSubSkills: area.totalSubSkills,
+          totalScore: area.totalScore,
+          percentageScore: area.percentageScore,
+          risk
+        };
+      });
+      const totalAreas = this.assessmentAreas.length;
+      const groupData = [
+        { label: 'High Risk', level: 'High', color: '#ef4444' },
+        { label: 'Medium Risk', level: 'Medium', color: '#eab308' },
+        { label: 'Low Risk', level: 'Low', color: '#14b8a6' }
+      ];
+      this.riskGroups = groupData.map((g, idx) => {
+        const areas = this.assessmentAreas.filter(a => a.risk === g.level);
+        const groupPercentage = totalAreas ? Math.round((areas.length / totalAreas) * 100) : 0;
+        return {
+          label: g.label,
+          level: g.level as 'High' | 'Medium' | 'Low',
+          color: g.color,
+          areas,
+          groupPercentage,
+          expanded: idx === 0
+        };
+      });
+    }
+    console.log('totalSum:', this.totalSum);
+    console.log('riskGroups:', this.riskGroups);
   }
 
-  processResult() {
-    if (!this.result || !this.result.assessmentAreas) return;
-    const riskColors = { high: '#ef4444', medium: '#eab308', low: '#14b8a6' };
-    const riskLabels = { high: 'High Risk', medium: 'Medium Risk', low: 'Low Risk' };
-    const grouped: any = { high: [], medium: [], low: [] };
-    let maxRisk: 'high' | 'medium' | 'low' = 'low';
-    let totalSum = this.result.totalSum || 0;
-    const areas: AreaResult[] = this.result.assessmentAreas.map((area: any) => {
-      let risk: 'high' | 'medium' | 'low' = 'low';
-      if (area.percentageScore >= 70) risk = 'high';
-      else if (area.percentageScore >= 40) risk = 'medium';
-      grouped[risk].push({ ...area, risk });
-      if (risk === 'high') maxRisk = 'high';
-      else if (risk === 'medium' && maxRisk !== 'high') maxRisk = 'medium';
-      return { ...area, risk };
-    });
-    this.overallRisk = maxRisk;
-    this.overallRiskLabel = maxRisk.toUpperCase();
-    // Chart segments
-    const total = areas.reduce((sum, a) => sum + a.percentageScore, 0) || 1;
-    this.chartSegments = areas.map((a) => ({
-      color: riskColors[a.risk],
-      label: a.areaName,
-      percent: a.percentageScore,
-      areaName: a.areaName
-    }));
-    // Area label positions (evenly spaced around the circle)
-    const n = areas.length;
-    this.areaLabelPositions = areas.map((a, i) => {
-      const angle = (2 * Math.PI * i) / n - Math.PI / 2;
-      const r = 90;
-      return {
-        x: 60 + r * Math.cos(angle),
-        y: 60 + r * Math.sin(angle) - 5,
-        name: a.areaName
-      };
-    });
-    // Grouped areas for summary
-    this.groupedAreas = [
-      { risk: 'high', label: riskLabels.high, color: riskColors.high, areas: grouped.high, expanded: grouped.high.length > 0 },
-      { risk: 'medium', label: riskLabels.medium, color: riskColors.medium, areas: grouped.medium, expanded: grouped.high.length === 0 && grouped.medium.length > 0 },
-      { risk: 'low', label: riskLabels.low, color: riskColors.low, areas: grouped.low, expanded: grouped.high.length === 0 && grouped.medium.length === 0 }
-    ];
+  toggleDropdown(index: number) {
+    this.riskGroups.forEach((group, i) => group.expanded = i === index ? !group.expanded : false);
+  }
+
+  getRiskColor(risk: string): string {
+    switch (risk.toLowerCase()) {
+      case 'low': return '#B0F2B6';
+      case 'medium': return '#F9F295';
+      case 'high': return '#F7A7A7';
+      default: return '#DDD';
+    }
+  }
+
+  getRiskTextColor(risk: string): string {
+    switch (risk.toLowerCase()) {
+      case 'low': return '#146c2c';
+      case 'medium': return '#967D00';
+      case 'high': return '#9A1515';
+      default: return '#333';
+    }
   }
 
   getChartOffset(index: number): number {
     // Each segment starts after the previous one
     let offset = 0;
     for (let i = 0; i < index; i++) {
-      offset -= (this.chartSegments[i].percent * 3.77) / 100 * 377;
+      offset -= this.riskGroups[i].groupPercentage * 2.4;
     }
     return offset;
   }
 
-  getRiskColor(risk: string): string {
-    if (risk === 'high') return '#ef4444';
-    if (risk === 'medium') return '#eab308';
-    return '#14b8a6';
-  }
-
-  toggleExpand(group: any) {
-    group.expanded = !group.expanded;
-  }
-
   createPlan() {
-    // Placeholder for create plan action
-    alert('Create Plan action!');
+    alert('Navigating to create plan...');
   }
 
-  goBack(): void {
-    this.router.navigate(['/therapist/patients']);
+  goToCreatePlan() {
+    this.router.navigate(['/create-plan']);
+  }
+
+  goBack() {
+    this.router.navigate(['../']);
   }
 }
